@@ -42,7 +42,7 @@ Not shown: 998 closed ports
 PORT   STATE SERVICE VERSION
 22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
 | ssh-hostkey: 
-|   2048 6d:16:f4:32:eb:46:ca:37:04:d2:a5:aa:74:ed🆎fc (RSA)
+|   2048 6d:16:f4:32:eb:46:ca:37:04:d2:a5:aa:74:ed:ab:fc (RSA)
 |   256 78:29:78:d9:f5:43:d1:cf:a0:03:55:b1:da:9e:51:b6 (ECDSA)
 |_  256 85:2e:7d:66:30:a6:6e:30:04:82:c1:ae:ba:a4:99:bd (ED25519)
 80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
@@ -309,7 +309,7 @@ PORT   STATE SERVICE VERSION
 | ssh-hostkey: 
 |   2048 a2:3b:b0:dd:28:91:bf:e8:f9:30:82:31:23:2f:92:18 (RSA)
 |   256 e6:3b:fb:b3:7f:9a:35:a8:bd:d0:27:7b:25:d4:ed:dc (ECDSA)
-|_  256 c9:54:3d:91:01:78:03🆎16:14:6b:cc:f0:b7:3a:55 (ED25519)
+|_  256 c9:54:3d:91:01:78:03:ab:16:14:6b:cc:f0:b7:3a:55 (ED25519)
 80/tcp open  http    nginx
 | http-robots.txt: 55 disallowed entries (15 shown)
 | / /autocomplete/users /search /api /admin /profile 
@@ -433,7 +433,7 @@ User www-data may run the following commands on bitlab:
     (root) NOPASSWD: /usr/bin/git pull
 www-data@bitlab:/var/www$ getent passwd www-data
 getent passwd www-data
-www-data❌33:33:www-data:/var/www:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
 www-data@bitlab:/tmp/profile$ cd /var/www/html/profile
 cd /var/www/html/profile
 www-data@bitlab:/var/www/html/profile$ ls -la
