@@ -12,10 +12,10 @@
     
     <item>
       <title>Hack The Box - AI</title>
-      <link>https://ceso.github.io/es/posts/htb/ai/</link>
+      <link>https://ceso.github.io/es/posts/2020/02/hack-the-box-ai/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ceso.github.io/es/posts/htb/ai/</guid>
+      <guid>https://ceso.github.io/es/posts/2020/02/hack-the-box-ai/</guid>
       <description>Resumen rápido Finalmente estoy posteando el walk-through de esta máquina, actualmente estoy preparando el OSCP, por lo que no tengo tanto tiempo para poder escribir en el momento. Al momento que rompí esta máquina, aún estaba documentando solamente vía screenshots, por lo que la fecha/hora entre algunas cosas puede diferir (le entré de nuevo para conseguir doc. más clara).
 Esta fue una máquina que para el punto de entrada, es necesario subir un .</description>
     </item>

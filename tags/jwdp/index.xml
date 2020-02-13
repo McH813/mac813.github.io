@@ -12,10 +12,10 @@
     
     <item>
       <title>Hack The Box - AI</title>
-      <link>https://ceso.github.io/posts/htb/ai/</link>
+      <link>https://ceso.github.io/posts/2020/02/hack-the-box-ai/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ceso.github.io/posts/htb/ai/</guid>
+      <guid>https://ceso.github.io/posts/2020/02/hack-the-box-ai/</guid>
       <description>Quick Summary Finally, I&amp;rsquo;m posting the walk-through of this box, currently, I&amp;rsquo;m preparing my OSCP so most of my free time goes dedicated to it :D. At the time I did this box, I was only documenting with screenshots, so some dates could differ between the write up below as I accessed now to get plain text to not overload this with screenshots.
 This was a box where for the foothold, you needed to upload a .</description>
     </item>
