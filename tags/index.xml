@@ -5,10 +5,19 @@
     <link>https://ceso.github.io/tags/</link>
     <description>Recent content in Tags on Ceso Adventures</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 04 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://ceso.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Blog</title>
+      <link>https://ceso.github.io/tags/blog/</link>
+      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ceso.github.io/tags/blog/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Code Analysis</title>
@@ -88,15 +97,6 @@
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://ceso.github.io/tags/sqli/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ssh</title>
-      <link>https://ceso.github.io/tags/ssh/</link>
-      <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ceso.github.io/tags/ssh/</guid>
       <description></description>
     </item>
     
