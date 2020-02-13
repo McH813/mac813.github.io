@@ -96,7 +96,7 @@ Algo más de enumeración se lleva a cabo.</p>
 
 
 
-<p>Is given a try to create a .wav file from text (text -&gt; .mp3 -&gt; .wav), upload it and see what happens, the result is an exception which gives a hint: there is access to a mysql database, which means will be possible to do an sql injection.</p>
+<p>Se trata de crear un .wav desde un archivo de texto (.txt -&gt; .mp3 -&gt; .wav), subirlo y ver que pasa, el resultado es una excepción que da un hint: hay un base de datos del otro lado, por lo que puede ser probable (más con la excepción que se pueda hacer una inyección).</p>
 
 
     <img src="/images/htb/ai/1.1-web-rce-1.png"  class="center"  style="border-radius: 8px;"  />
