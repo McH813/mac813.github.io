@@ -3,23 +3,55 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ceso.github.io/es/categories/</loc>
-    <priority>0</priority>
+    <loc>https://ceso.github.io/es/posts/htb/ai/</loc>
+    <lastmod>2020-02-13T12:11:36+01:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://ceso.github.io/categories/"
+                href="https://ceso.github.io/posts/htb/ai/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://ceso.github.io/es/categories/"
+                href="https://ceso.github.io/es/posts/htb/ai/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ceso.github.io/es/tags/htb-medium/</loc>
+    <lastmod>2020-02-13T12:11:36+01:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ceso.github.io/tags/htb-medium/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://ceso.github.io/es/tags/htb-medium/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ceso.github.io/es/tags/jwdp/</loc>
+    <lastmod>2020-02-13T12:11:36+01:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ceso.github.io/tags/jwdp/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://ceso.github.io/es/tags/jwdp/"
                 />
   </url>
   
   <url>
     <loc>https://ceso.github.io/es/</loc>
-    <lastmod>2020-02-13T05:42:53+01:00</lastmod>
+    <lastmod>2020-02-13T12:11:36+01:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -30,6 +62,38 @@
                 rel="alternate"
                 hreflang="es"
                 href="https://ceso.github.io/es/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ceso.github.io/es/tags/linux/</loc>
+    <lastmod>2020-02-13T12:11:36+01:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ceso.github.io/tags/linux/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://ceso.github.io/es/tags/linux/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ceso.github.io/es/posts/</loc>
+    <lastmod>2020-02-13T12:11:36+01:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ceso.github.io/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://ceso.github.io/es/posts/"
                 />
   </url>
   
@@ -49,7 +113,24 @@
   </url>
   
   <url>
+    <loc>https://ceso.github.io/es/tags/sqli/</loc>
+    <lastmod>2020-02-13T12:11:36+01:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ceso.github.io/tags/sqli/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://ceso.github.io/es/tags/sqli/"
+                />
+  </url>
+  
+  <url>
     <loc>https://ceso.github.io/es/tags/</loc>
+    <lastmod>2020-02-13T12:11:36+01:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
