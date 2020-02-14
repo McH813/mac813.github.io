@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Las Aventuras de Ceso</title>
@@ -11,7 +11,7 @@
     
     
     <item>
-      <title>Htb Medium</title>
+      <title>htb-medium</title>
       <link>https://ceso.github.io/es/tags/htb-medium/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -20,7 +20,7 @@
     </item>
     
     <item>
-      <title>Jwdp</title>
+      <title>jwdp</title>
       <link>https://ceso.github.io/es/tags/jwdp/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -29,7 +29,7 @@
     </item>
     
     <item>
-      <title>Linux</title>
+      <title>linux</title>
       <link>https://ceso.github.io/es/tags/linux/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -38,7 +38,7 @@
     </item>
     
     <item>
-      <title>Sqli</title>
+      <title>sqli</title>
       <link>https://ceso.github.io/es/tags/sqli/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       

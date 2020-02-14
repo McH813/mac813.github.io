@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -20,7 +20,6 @@
   <url>
     <loc>https://ceso.github.io/es/tags/htb-medium/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -36,7 +35,6 @@
   <url>
     <loc>https://ceso.github.io/es/tags/jwdp/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -52,7 +50,6 @@
   <url>
     <loc>https://ceso.github.io/es/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -68,7 +65,6 @@
   <url>
     <loc>https://ceso.github.io/es/tags/linux/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -84,7 +80,6 @@
   <url>
     <loc>https://ceso.github.io/es/posts/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -98,23 +93,8 @@
   </url>
   
   <url>
-    <loc>https://ceso.github.io/es/about/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://ceso.github.io/about/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://ceso.github.io/es/about/"
-                />
-  </url>
-  
-  <url>
     <loc>https://ceso.github.io/es/tags/sqli/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -130,7 +110,6 @@
   <url>
     <loc>https://ceso.github.io/es/tags/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -140,6 +119,20 @@
                 rel="alternate"
                 hreflang="es"
                 href="https://ceso.github.io/es/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ceso.github.io/es/about/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ceso.github.io/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://ceso.github.io/es/about/"
                 />
   </url>
   
