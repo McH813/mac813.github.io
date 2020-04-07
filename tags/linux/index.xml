@@ -5,10 +5,20 @@
     <link>https://ceso.github.io/tags/linux/</link>
     <description>Recent content in linux on Ceso Adventures</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Apr 2020 02:30:30 +0000</lastBuildDate>
     
 	<atom:link href="https://ceso.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Hacking/OSCP cheatsheet</title>
+      <link>https://ceso.github.io/posts/2020/04/hacking/oscp-cheatsheet/</link>
+      <pubDate>Tue, 07 Apr 2020 02:30:30 +0000</pubDate>
+      
+      <guid>https://ceso.github.io/posts/2020/04/hacking/oscp-cheatsheet/</guid>
+      <description>Hacking/OSCP Cheatsheet Well, just finished my 90 days journey of OSCP labs, so now here is my cheatsheet of it (and of hacking itself), I will be adding stuff in an incremental way as I go having time and/or learning new stuff. But this is basically the tools I tend to relie and use in this way the most. Hope is helpfull for you!
+Enumeration Network sniffing (using NMAP) I tend to run 3 nmaps, an initial one, a full one and an UDP one, all of them in parallel:</description>
+    </item>
     
     <item>
       <title>Hack The Box - AI</title>
@@ -36,16 +46,6 @@ This was a box where for the foothold, you needed to upload a .</description>
       
       <guid>https://ceso.github.io/posts/2020/01/hack-the-box-craft/</guid>
       <description>Quick Summary So!! Today was just retired Craft from Hack the box, this was a really fun box to do, and also I felt pretty well doing it, because even if I needed some nudges, it was actually the first box I got to the foothold without hints (elsen if I needed some guidance with python, thanks a lot @Frundrod!!), and afterward to get user I was a bit lost and also needed some hints (was not realizing something I have literally in my nose, thankss a lot @Fugl!</description>
-    </item>
-    
-    <item>
-      <title>Hacki</title>
-      <link>https://ceso.github.io/posts/1/01/hacki/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ceso.github.io/posts/1/01/hacki/</guid>
-      <description>Intro Well, just finished my 90 days journey of OSCP labs, now here is my cheatsheet of it (and of hacking itself), I will be adding stuff in an incremental way as I go having time and/or learning new stuff. But this is basically the tools I tend to relie and use in this way the most. Hope is helpfull for you!
-Enumeration Network sniffing (using NMAP) I tend to run 3 nmaps, an initial one, a full one and an UDP one, all of them in parallel:</description>
     </item>
     
   </channel>

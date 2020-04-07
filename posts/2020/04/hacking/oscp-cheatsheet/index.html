@@ -5,17 +5,17 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="ceso ">
-<meta name="description" content="Intro Well, just finished my 90 days journey of OSCP labs, now here is my cheatsheet of it (and of hacking itself), I will be adding stuff in an incremental way as I go having time and/or learning new stuff. But this is basically the tools I tend to relie and use in this way the most. Hope is helpfull for you!
+<meta name="description" content="Hacking/OSCP Cheatsheet Well, just finished my 90 days journey of OSCP labs, so now here is my cheatsheet of it (and of hacking itself), I will be adding stuff in an incremental way as I go having time and/or learning new stuff. But this is basically the tools I tend to relie and use in this way the most. Hope is helpfull for you!
 Enumeration Network sniffing (using NMAP) I tend to run 3 nmaps, an initial one, a full one and an UDP one, all of them in parallel:" />
 <meta name="keywords" content="CTF, Security, HTB, blog, infosec, blog, cheatsheet, hacking, linux, windows, exfiltration, privilegeescalation" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
-<link rel="canonical" href="https://ceso.github.io/posts/1/01/hacki/" />
+<link rel="canonical" href="https://ceso.github.io/posts/2020/04/hacking/oscp-cheatsheet/" />
 
 
     <title>
         
-            Hacki :: Ceso Adventures 
+            Hacking/OSCP cheatsheet :: Ceso Adventures 
         
     </title>
 
@@ -44,23 +44,26 @@ Enumeration Network sniffing (using NMAP) I tend to run 3 nmaps, an initial one,
     <meta name="msapplication-TileColor" content="#252627">
     <meta name="theme-color" content="#252627">
 
-<meta itemprop="name" content="Hacki">
+<meta itemprop="name" content="Hacking/OSCP cheatsheet">
 <meta itemprop="description" content="My humble cheatsheet of most used tools, webs, etc">
-
-<meta itemprop="wordCount" content="1188">
-<meta itemprop="image" content="https://ceso.github.io/images/htb/ai/ai-header.jpg">
+<meta itemprop="datePublished" content="2020-04-07T02:30:30&#43;00:00" />
+<meta itemprop="dateModified" content="2020-04-07T02:30:30&#43;00:00" />
+<meta itemprop="wordCount" content="1219">
+<meta itemprop="image" content="https://ceso.github.io/images/cheatsheet/banner.jpg">
 
 
 
 <meta itemprop="keywords" content="blog,cheatsheet,hacking,linux,windows,exfiltration,privilegeescalation," /><meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://ceso.github.io/images/htb/ai/ai-header.jpg"/>
+<meta name="twitter:image" content="https://ceso.github.io/images/cheatsheet/banner.jpg"/>
 
-<meta name="twitter:title" content="Hacki"/>
+<meta name="twitter:title" content="Hacking/OSCP cheatsheet"/>
 <meta name="twitter:description" content="My humble cheatsheet of most used tools, webs, etc"/>
 
 
 
 
+
+    <meta property="article:published_time" content="2020-04-07 02:30:30 &#43;0000 UTC" />
 
 
 
@@ -131,8 +134,16 @@ Enumeration Network sniffing (using NMAP) I tend to run 3 nmaps, an initial one,
       </p>
     </div>
 
-    <h2 class="post-title"><a href="https://ceso.github.io/posts/1/01/hacki/">Hacki</a></h2>
+    <h2 class="post-title"><a href="https://ceso.github.io/posts/2020/04/hacking/oscp-cheatsheet/">Hacking/OSCP cheatsheet</a></h2>
     <div class="post-meta">
+      
+        <span class="post-date">
+          2020-04-07
+        </span>
+
+        
+          
+        
       
 
       
@@ -167,7 +178,7 @@ Enumeration Network sniffing (using NMAP) I tend to run 3 nmaps, an initial one,
 
     
     <li>
-      <a href="#intro">Intro</a>
+      <a href="#hackingoscp-cheatsheet">Hacking/OSCP Cheatsheet</a>
     
 
     
@@ -296,9 +307,52 @@ Enumeration Network sniffing (using NMAP) I tend to run 3 nmaps, an initial one,
     
     </li><li>
           <a href="#multi-hops">Multi-hops</a>
-  </li></ul></li></ul></li></ul>
-</div><h1 id="intro">Intro</h1>
-<p>Well, just finished my 90 days journey of OSCP labs, now here is my cheatsheet of it (and of hacking itself), I will be adding stuff in an incremental way as I go having time and/or learning new stuff.
+    
+
+    
+    </li></ul></li></ul></li><li>
+          <a href="#usefull-links">Usefull links</a>
+    
+
+    
+    <ul>
+            <li>
+          <a href="#privilege-escalation">Privilege escalation</a>
+    
+
+    
+    <ul>
+            <li>
+          <a href="#linux">Linux</a>
+    
+
+    
+    </li><li>
+          <a href="#windows">Windows</a>
+    
+
+    
+    </li></ul></li><li>
+          <a href="#misc">Misc</a>
+    
+
+    
+    <ul>
+            <li>
+          <a href="#windows-1">Windows</a>
+    
+
+    
+    </li><li>
+          <a href="#linux-1">Linux</a>
+    
+
+    
+    </li></ul></li><li>
+          <a href="#compiling-exploits">Compiling exploits</a>
+  </li></ul></li></ul>
+</div><h1 id="hackingoscp-cheatsheet">Hacking/OSCP Cheatsheet</h1>
+<p>Well, just finished my 90 days journey of OSCP labs, so now here is my cheatsheet of it (and of hacking itself), I will be adding stuff in an incremental way as I go having time and/or learning new stuff.
 But this is basically the tools I tend to relie and use in this way the most.
 Hope is helpfull for you!</p>
 <h1 id="enumeration">Enumeration</h1>
@@ -442,7 +496,33 @@ Host foreman.example.mgmt
   ProxyCommand ssh -W %h:%p fw.example.mgmt
 </code></pre><p>And now to setup the &ldquo;multiple hop vpn&rdquo;, run:</p>
 <pre><code class="language-console" data-lang="console">sshuttle -r foreman.example.mgmt -v 192.168.25.0/24 &amp;
-</code></pre>
+</code></pre><h1 id="usefull-links">Usefull links</h1>
+<h2 id="privilege-escalation">Privilege escalation</h2>
+<h3 id="linux">Linux</h3>
+<p><a href="https://guif.re/linuxeop">https://guif.re/linuxeop</a>
+<a href="https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/">https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/</a>
+<a href="https://www.win.tue.nl/~aeb/linux/hh/hh-8.html">https://www.win.tue.nl/~aeb/linux/hh/hh-8.html</a>
+<a href="http://www.dankalia.com/tutor/01005/0100501004.htm">http://www.dankalia.com/tutor/01005/0100501004.htm</a></p>
+<h3 id="windows">Windows</h3>
+<p><a href="http://www.fuzzysecurity.com/tutorials/16.html">http://www.fuzzysecurity.com/tutorials/16.html</a>
+<a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md">https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md</a>
+<a href="https://github.com/ankh2054/windows-pentest">https://github.com/ankh2054/windows-pentest</a>
+<a href="https://sushant747.gitbooks.io/total-oscp-guide/privilege_escalation_windows.html">https://sushant747.gitbooks.io/total-oscp-guide/privilege_escalation_windows.html</a>
+<a href="https://hackingandsecurity.blogspot.com/2017/09/oscp-windows-priviledge-escalation.html">https://hackingandsecurity.blogspot.com/2017/09/oscp-windows-priviledge-escalation.html</a></p>
+<h2 id="misc">Misc</h2>
+<h3 id="windows-1">Windows</h3>
+<p><a href="http://www.cheat-sheets.org/saved-copy/Windows_folders_quickref.pdf">http://www.cheat-sheets.org/saved-copy/Windows_folders_quickref.pdf</a>
+<a href="https://www.lemoda.net/windows/windows2unix/windows2unix.html">https://www.lemoda.net/windows/windows2unix/windows2unix.html</a>
+<a href="https://bernardodamele.blogspot.com/2011/12/dump-windows-password-hashes.html">https://bernardodamele.blogspot.com/2011/12/dump-windows-password-hashes.html</a></p>
+<h3 id="linux-1">Linux</h3>
+<p><a href="http://www.pathname.com/fhs/pub/fhs-2.3.html">http://www.pathname.com/fhs/pub/fhs-2.3.html</a>
+<a href="https://github.com/rapid7/ssh-badkeys">https://github.com/rapid7/ssh-badkeys</a>
+<a href="http://www.linusakesson.net/programming/tty/">http://www.linusakesson.net/programming/tty/</a>
+<a href="http://pentestmonkey.net/blog/post-exploitation-without-a-tty">http://pentestmonkey.net/blog/post-exploitation-without-a-tty</a></p>
+<h2 id="compiling-exploits">Compiling exploits</h2>
+<p><a href="https://stackoverflow.com/questions/4032373/linking-against-an-old-version-of-libc-to-provide-greater-application-coverage">https://stackoverflow.com/questions/4032373/linking-against-an-old-version-of-libc-to-provide-greater-application-coverage</a>
+<a href="https://www.lordaro.co.uk/posts/2018-08-26-compiling-glibc.html">https://www.lordaro.co.uk/posts/2018-08-26-compiling-glibc.html</a></p>
+
     </div>
     
       
@@ -453,13 +533,13 @@ Host foreman.example.mgmt
           </div>
           <div class="pagination__buttons">
             
-              <span class="button previous">
-                <a href="https://ceso.github.io/posts/2019/12/shutdown-r-now/">
-                  <span class="button__icon">←</span>
-                  <span class="button__text">shutdown -r now</span>
+            
+              <span class="button next">
+                <a href="https://ceso.github.io/posts/2020/02/hack-the-box-ai/">
+                  <span class="button__text">Hack The Box - AI</span>
+                  <span class="button__icon">→</span>
                 </a>
               </span>
-            
             
           </div>
         </div>
