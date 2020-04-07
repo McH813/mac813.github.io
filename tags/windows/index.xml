@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>windows on Ceso Adventures</title>
+    <link>https://ceso.github.io/tags/windows/</link>
+    <description>Recent content in windows on Ceso Adventures</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	<atom:link href="https://ceso.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hacki</title>
+      <link>https://ceso.github.io/posts/1/01/hacki/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ceso.github.io/posts/1/01/hacki/</guid>
+      <description>Intro Well, just finished my 90 days journey of OSCP labs, now here is my cheatsheet of it (and of hacking itself), I will be adding stuff in an incremental way as I go having time and/or learning new stuff. But this is basically the tools I tend to relie and use in this way the most. Hope is helpfull for you!
+Enumeration Network sniffing (using NMAP) I tend to run 3 nmaps, an initial one, a full one and an UDP one, all of them in parallel:</description>
+    </item>
+    
+  </channel>
+</rss>

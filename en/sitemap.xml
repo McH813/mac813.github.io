@@ -188,6 +188,26 @@
   </url>
   
   <url>
+    <loc>https://ceso.github.io/tags/cheatsheet/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ceso.github.io/tags/exfiltration/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ceso.github.io/posts/1/01/hacki/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ceso.github.io/tags/hacking/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ceso.github.io/tags/privilegeescalation/</loc>
+  </url>
+  
+  <url>
     <loc>https://ceso.github.io/about/</loc>
     <xhtml:link
                 rel="alternate"
@@ -199,6 +219,10 @@
                 hreflang="en"
                 href="https://ceso.github.io/about/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://ceso.github.io/tags/windows/</loc>
   </url>
   
 </urlset>

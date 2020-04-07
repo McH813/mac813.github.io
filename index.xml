@@ -49,6 +49,16 @@ I have always been thinking about writing a blog, but my mindset has always been
     </item>
     
     <item>
+      <title>Hacki</title>
+      <link>https://ceso.github.io/posts/1/01/hacki/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ceso.github.io/posts/1/01/hacki/</guid>
+      <description>Intro Well, just finished my 90 days journey of OSCP labs, now here is my cheatsheet of it (and of hacking itself), I will be adding stuff in an incremental way as I go having time and/or learning new stuff. But this is basically the tools I tend to relie and use in this way the most. Hope is helpfull for you!
+Enumeration Network sniffing (using NMAP) I tend to run 3 nmaps, an initial one, a full one and an UDP one, all of them in parallel:</description>
+    </item>
+    
+    <item>
       <title>Whoami</title>
       <link>https://ceso.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
