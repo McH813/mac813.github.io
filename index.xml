@@ -17,7 +17,7 @@
       
       <guid>https://ceso.github.io/posts/2020/04/hacking/oscp-cheatsheet/</guid>
       <description>Hacking/OSCP Cheatsheet Well, just finished my 90 days journey of OSCP labs, so now here is my cheatsheet of it (and of hacking itself), I will be adding stuff in an incremental way as I go having time and/or learning new stuff. But this is basically the tools I tend to relie and use in this way the most. Hope is helpfull for you!
-Enumeration Network sniffing (using NMAP) I tend to run 3 nmaps, an initial one, a full one and an UDP one, all of them in parallel:</description>
+Enumeration Network discoverie Nmap I tend to run 3 nmaps, an initial one, a full one and an UDP one, all of them in parallel:</description>
     </item>
     
     <item>
