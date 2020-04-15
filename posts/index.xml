@@ -392,19 +392,19 @@ EOF
 <li><a href="https://www.lordaro.co.uk/posts/2018-08-26-compiling-glibc.html">https://www.lordaro.co.uk/posts/2018-08-26-compiling-glibc.html</a></li>
 <li><a href="https://www.offensive-security.com/metasploit-unleashed/alphanumeric-shellcode/">https://www.offensive-security.com/metasploit-unleashed/alphanumeric-shellcode/</a></li>
 </ul>
-<h2 id="obfuscators">Obfuscators</h2>
+<h3 id="obfuscators">Obfuscators</h3>
 <ul>
 <li><a href="https://github.com/danielbohannon/Invoke-Obfuscation">https://github.com/danielbohannon/Invoke-Obfuscation</a></li>
 <li><a href="https://github.com/Bashfuscator/Bashfuscator">https://github.com/Bashfuscator/Bashfuscator</a></li>
 </ul>
-<h2 id="deobfuscators">Deobfuscators</h2>
+<h3 id="deobfuscators">Deobfuscators</h3>
 <ul>
 <li><a href="https://www.unphp.net/">https://www.unphp.net/</a></li>
 <li><a href="https://lelinhtinh.github.io/de4js/">https://lelinhtinh.github.io/de4js/</a></li>
 <li><a href="http://jsnice.org/">http://jsnice.org/</a></li>
 <li><a href="https://github.com/java-deobfuscator/deobfuscator">https://github.com/java-deobfuscator/deobfuscator</a></li>
 </ul>
-<h2 id="buffer-overflows">Buffer Overflows</h2>
+<h3 id="buffer-overflows">Buffer Overflows</h3>
 <ul>
 <li><a href="https://github.com/justinsteven/dostackbufferoverflowgood">https://github.com/justinsteven/dostackbufferoverflowgood</a></li>
 <li><a href="https://github.com/stephenbradshaw/vulnserver">https://github.com/stephenbradshaw/vulnserver</a></li>
