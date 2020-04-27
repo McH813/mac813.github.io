@@ -3,13 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://ceso.github.io/posts/2020/04/a-journey-in-the-dark-an-adventures-tale-towards-oscp/</loc>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ceso.github.io/tags/blog/</loc>
-    <lastmod>2020-04-07T02:30:30+00:00</lastmod>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://ceso.github.io/</loc>
-    <lastmod>2020-04-07T02:30:30+00:00</lastmod>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -23,17 +28,57 @@
   </url>
   
   <url>
+    <loc>https://ceso.github.io/tags/hacking/</loc>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ceso.github.io/tags/oscp/</loc>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ceso.github.io/posts/</loc>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://ceso.github.io/es/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ceso.github.io/posts/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ceso.github.io/tags/</loc>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://ceso.github.io/es/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ceso.github.io/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ceso.github.io/tags/thoughts/</loc>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ceso.github.io/tags/cheatsheet/</loc>
     <lastmod>2020-04-07T02:30:30+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://ceso.github.io/tags/exfiltration/</loc>
-    <lastmod>2020-04-07T02:30:30+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ceso.github.io/tags/hacking/</loc>
     <lastmod>2020-04-07T02:30:30+00:00</lastmod>
   </url>
   
@@ -58,38 +103,8 @@
   </url>
   
   <url>
-    <loc>https://ceso.github.io/posts/</loc>
-    <lastmod>2020-04-07T02:30:30+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://ceso.github.io/es/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://ceso.github.io/posts/"
-                />
-  </url>
-  
-  <url>
     <loc>https://ceso.github.io/tags/privilegeescalation/</loc>
     <lastmod>2020-04-07T02:30:30+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ceso.github.io/tags/</loc>
-    <lastmod>2020-04-07T02:30:30+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://ceso.github.io/es/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://ceso.github.io/tags/"
-                />
   </url>
   
   <url>
@@ -209,11 +224,6 @@
   
   <url>
     <loc>https://ceso.github.io/posts/2019/12/shutdown-r-now/</loc>
-    <lastmod>2019-12-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ceso.github.io/tags/thoughts/</loc>
     <lastmod>2019-12-22T00:00:00+00:00</lastmod>
   </url>
   

@@ -5,10 +5,20 @@
     <link>https://ceso.github.io/tags/blog/</link>
     <description>Recent content in blog on Ceso Adventures</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 07 Apr 2020 02:30:30 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 27 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://ceso.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A Journey in the Dark - An adventure&#39;s tale towards OSCP</title>
+      <link>https://ceso.github.io/posts/2020/04/a-journey-in-the-dark-an-adventures-tale-towards-oscp/</link>
+      <pubDate>Mon, 27 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ceso.github.io/posts/2020/04/a-journey-in-the-dark-an-adventures-tale-towards-oscp/</guid>
+      <description>Preface This is the story of how I got my OSCP coming from a background as Linux Sysadmin/DevOps as also which ones are my plans for the future.
+Every tale where there is an adventurer, starts with him (the adventurer) and his friends, these who share the journey providing support and advice through it, as the story moves forward, new characters tend to appear, joining the adventurer in his travel.</description>
+    </item>
     
     <item>
       <title>Hacking/OSCP cheatsheet</title>
