@@ -844,6 +844,15 @@ SSH-2.0-OpenSSH_6.2p2 Debian-6
 </code></pre><h4 id="fuff">fuff</h4>
 <p>Web fuzzer, <a href="https://github.com/ffuf/ffuf">you can get fuff here</a>, it basically bruteforces the dirs.</p>
 <pre><code class="language-console" data-lang="console">ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -u http://192.168.24.24/FUZZ
+</code></pre><h3 id="most-usefull-dictionaries-oscphtb">Most usefull dictionaries (OSCP/HTB)</h3>
+<pre><code class="language-console" data-lang="console">/usr/share/wordlists/rockyou.txt
+/usr/share/wordlists/wfuzz/others/common_pass.txt
+
+In seclists-pkg:
+
+/usr/share/seclists/Passwords/Default-Credentials/tomcat-betterdefaultpasslist.txt
+/usr/share/seclists/Passwords/Leaked-Databases/alleged-gmail-passwords.txt
+/usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
 </code></pre><h3 id="samba">Samba</h3>
 <h4 id="smbclient">smbclient</h4>
 <p>Check if there is anonymous login enabled:</p>

@@ -50,7 +50,7 @@ Enumeration Network discoverie Nmap I tend to run 3 nmaps, an initial one, a ful
 <meta itemprop="description" content="My humble cheatsheet of most used tools, webs, etc">
 <meta itemprop="datePublished" content="2020-04-07T02:30:30&#43;00:00" />
 <meta itemprop="dateModified" content="2020-04-07T02:30:30&#43;00:00" />
-<meta itemprop="wordCount" content="2203">
+<meta itemprop="wordCount" content="2214">
 <meta itemprop="image" content="https://ceso.github.io/images/cheatsheet/banner.jpg">
 
 
@@ -259,6 +259,11 @@ Enumeration Network discoverie Nmap I tend to run 3 nmaps, an initial one, a ful
 
     
     </li></ul></li><li>
+          <a href="#most-usefull-dictionaries-oscphtb">Most usefull dictionaries (OSCP/HTB)</a>
+    
+
+    
+    </li><li>
           <a href="#samba">Samba</a>
     
 
@@ -684,6 +689,15 @@ SSH-2.0-OpenSSH_6.2p2 Debian-6
 </code></pre><h4 id="fuff">fuff</h4>
 <p>Web fuzzer, <a href="https://github.com/ffuf/ffuf">you can get fuff here</a>, it basically bruteforces the dirs.</p>
 <pre><code class="language-console" data-lang="console">ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -u http://192.168.24.24/FUZZ
+</code></pre><h3 id="most-usefull-dictionaries-oscphtb">Most usefull dictionaries (OSCP/HTB)</h3>
+<pre><code class="language-console" data-lang="console">/usr/share/wordlists/rockyou.txt
+/usr/share/wordlists/wfuzz/others/common_pass.txt
+
+In seclists-pkg:
+
+/usr/share/seclists/Passwords/Default-Credentials/tomcat-betterdefaultpasslist.txt
+/usr/share/seclists/Passwords/Leaked-Databases/alleged-gmail-passwords.txt
+/usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
 </code></pre><h3 id="samba">Samba</h3>
 <h4 id="smbclient">smbclient</h4>
 <p>Check if there is anonymous login enabled:</p>
